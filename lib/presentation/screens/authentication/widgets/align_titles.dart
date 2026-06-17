@@ -1,5 +1,4 @@
-import 'package:dawaya/core/constants/app_colors.dart';
-import 'package:dawaya/core/constants/app_strings.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class AlignTitleSubTitle extends StatelessWidget {
