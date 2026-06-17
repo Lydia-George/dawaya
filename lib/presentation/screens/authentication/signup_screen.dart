@@ -6,6 +6,7 @@ import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -96,6 +97,10 @@ class SignUpScreen extends StatelessWidget {
               /// -- OR SIGNUP WITH DIVIDER
               OrSignUpInLine(),
 
+              /// -- SOCIAL BUTTONS
+              SocialButtons(),
+
+
 
 
             ],
@@ -105,4 +110,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
