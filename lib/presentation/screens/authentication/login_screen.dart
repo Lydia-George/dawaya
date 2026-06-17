@@ -2,6 +2,7 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
 import 'package:flutter/material.dart';
@@ -26,19 +27,24 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25),
-            /// SIGN UP TXT
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                DText.login,
-                style: TextStyle(
-                  color: DColors.blackTxt,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
-              ),
+
+            /// SIGN In TXT
+            AlignTitleSubTitle(
+              titleTxt: DText.signIn,
+              textSize: DSizes.fontSizeLg,
+              textColor: DColors.blueLinear2,
+            ),
+
+            /// -- SIGN IN TITLE
+            AlignTitleSubTitle(
+              titleTxt: DText.loginTitle,
+              textSize: DSizes.fontSizeMd,
+              textColor: DColors.blueLinear1,
             ),
             
+            /// -- SIGN IN SUB-TITLE
+            AlignTitleSubTitle(titleTxt: DText, textSize: textSize)
+
             /// -- EMAIL
             AuthField(
               labelText: DText.email,
@@ -47,6 +53,7 @@ class LoginScreen extends StatelessWidget {
               icon: Icon(Icons.email_outlined),
             ),
             SizedBox(height: DSizes.spaceBtwItems),
+
             /// -- PASSWORD
             AuthField(
               labelText: DText.password,
@@ -55,9 +62,6 @@ class LoginScreen extends StatelessWidget {
               isObscure: true,
             ),
             SizedBox(height: DSizes.spaceBtwItems),
-
-
-
           ],
         ),
       ),
