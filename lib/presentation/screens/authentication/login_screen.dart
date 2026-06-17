@@ -5,6 +5,8 @@ import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/login_form.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_forgetPass.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -42,35 +44,25 @@ class LoginScreen extends StatelessWidget {
               textColor: DColors.blueLinear1,
             ),
 
-
             /// -- SIGN IN SUB-TITLE
             AlignTitleSubTitle(
               titleTxt: DText.loginSubTitle,
               textSize: DSizes.fontSizeSm,
               textColor: DColors.pestLinear1,
-            ),            SizedBox(height: DSizes.spaceBtwSections),
-
-
-            /// -- EMAIL
-            AuthField(
-              labelText: DText.email,
-              hintText: DText.hintEmail,
-              textInputType: TextInputType.emailAddress,
-              icon: Icon(Icons.email_outlined),
             ),
-            SizedBox(height: DSizes.spaceBtwItems),
+            SizedBox(height: DSizes.spaceBtwSections),
 
-            /// -- PASSWORD
-            AuthField(
-              labelText: DText.password,
-              hintText: DText.hintPassword,
-              icon: Icon(Icons.lock_outlined),
-              isObscure: true,
-            ),
-            SizedBox(height: DSizes.spaceBtwItems),
+            /// -- LOGIN FORM
+            LoginForm(),
+
+            /// -- REMEMBER ME & FORGOT PASS
+            RememberMeAndForgetPass(),
+
           ],
         ),
       ),
     );
   }
 }
+
+
