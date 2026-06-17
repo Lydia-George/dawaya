@@ -41,9 +41,15 @@ class LoginScreen extends StatelessWidget {
               textSize: DSizes.fontSizeMd,
               textColor: DColors.blueLinear1,
             ),
-            
+
+
             /// -- SIGN IN SUB-TITLE
-            AlignTitleSubTitle(titleTxt: DText, textSize: textSize)
+            AlignTitleSubTitle(
+              titleTxt: DText.loginSubTitle,
+              textSize: DSizes.fontSizeSm,
+              textColor: DColors.pestLinear1,
+            ),            SizedBox(height: DSizes.spaceBtwSections),
+
 
             /// -- EMAIL
             AuthField(
