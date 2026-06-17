@@ -3,11 +3,11 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/already_have_account.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
-import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/sign_up_form.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -54,41 +54,9 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: DSizes.spaceBtwSections),
 
-              /// -- FULL NAME
-              AuthField(
-                labelText: DText.fullName,
-                hintText: DText.fullNameHint,
-                textInputType: TextInputType.name,
-                icon: Icon(CupertinoIcons.person),
-              ),
-              SizedBox(height: DSizes.spaceBtwInputFields),
 
-              /// -- EMAIL
-              AuthField(
-                labelText: DText.email,
-                hintText: DText.hintEmail,
-                textInputType: TextInputType.emailAddress,
-                icon: Icon(Icons.email_outlined),
-              ),
-              SizedBox(height: DSizes.spaceBtwItems),
-
-              /// -- PASSWORD
-              AuthField(
-                labelText: DText.password,
-                hintText: DText.hintPassword,
-                icon: Icon(Icons.lock_outlined),
-                isObscure: true,
-              ),
-              SizedBox(height: DSizes.spaceBtwItems),
-
-              /// -- CONFIRM PASSWORD
-              AuthField(
-                labelText: 'Confirm Password',
-                hintText: DText.confirmPasswordHint,
-                icon: Icon(Icons.lock_outlined),
-                isObscure: true,
-              ),
-              SizedBox(height: DSizes.spaceBtwItems),
+             /// -- Form Fields
+             SignUpForm(),
 
               /// -- SIGNUP BUTTON
               AuthButtons(btnText: DText.signUp),
@@ -100,6 +68,9 @@ class SignUpScreen extends StatelessWidget {
               /// -- SOCIAL BUTTONS
               SocialButtons(),
 
+
+              /// -- ALREADY HAVE ACCOUNT
+              AlreadyHaveAccount(),
 
 
 
