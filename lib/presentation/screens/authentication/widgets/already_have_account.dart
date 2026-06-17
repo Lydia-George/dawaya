@@ -10,7 +10,10 @@ class AlreadyHaveAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(DText.alreadyHaveAcc),
+        Text(DText.alreadyHaveAcc,
+          style: TextStyle(
+          color: DColors.blackTxt
+        ),),
         TextButton(onPressed: () {},
             child: Text(
               DText.signIn,

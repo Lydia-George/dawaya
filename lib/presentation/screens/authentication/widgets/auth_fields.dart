@@ -27,17 +27,30 @@ class AuthField extends StatelessWidget {
       keyboardType:textInputType,
       obscureText: isObscure,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: DColors.pestLinear1
+          )
+        ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: DColors.dGrey1),
+            borderSide: BorderSide(color: DColors.blueLinear1),
           ),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(color: DColors.primaryColorBlue),
           ),
           hintText: hintText,
+          hintStyle: TextStyle(
+            color: DColors.blueLinear2
+          ),
           prefixIcon: icon,
+          prefixIconColor: DColors.pestLinear1,
           labelText: labelText,
+          labelStyle: TextStyle(
+            color: DColors.blueLinear2
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
           //  borderSide: BorderSide(color: DColors.dGrey1),

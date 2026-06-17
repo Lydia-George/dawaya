@@ -21,7 +21,7 @@ class OrSignUpInLine extends StatelessWidget {
         ),
         SizedBox(width: 10,),
         Text(
-          DText.orSignUpWith,
+          DText.orContinueWith,
           style: Theme.of(context).textTheme.bodySmall!.apply(
             color: DColors.primaryColorBlue,
           ),

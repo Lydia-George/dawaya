@@ -36,6 +36,7 @@ class SignUpScreen extends StatelessWidget {
               AlignTitleSubTitle(
                 titleTxt: DText.signUp,
                 textSize: DSizes.fontSizeLg,
+                textColor: DColors.blueLinear2,
               ),
               // SizedBox(height: DSizes.spaceBtwSections,),
 
@@ -43,6 +44,7 @@ class SignUpScreen extends StatelessWidget {
               AlignTitleSubTitle(
                 titleTxt: DText.signupTitle,
                 textSize: DSizes.fontSizeMd,
+                textColor: DColors.blueLinear1,
               ),
               // SizedBox(height: DSizes.spaceBtwSections,),
 
@@ -50,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
               AlignTitleSubTitle(
                 titleTxt: DText.signupSubTitle,
                 textSize: DSizes.fontSizeSm,
-                textColor: DColors.blueLinear1.withOpacity(0.6),
+                textColor: DColors.pestLinear1,
               ),
               SizedBox(height: DSizes.spaceBtwSections),
 
@@ -62,7 +64,7 @@ class SignUpScreen extends StatelessWidget {
               AuthButtons(btnText: DText.signUp),
               SizedBox(height: DSizes.spaceBtwItems),
 
-              /// -- OR SIGNUP WITH DIVIDER
+              /// -- OR CONTINUE WITH DIVIDER
               OrSignUpInLine(),
 
               /// -- SOCIAL BUTTONS
