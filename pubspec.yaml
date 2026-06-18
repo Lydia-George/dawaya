@@ -85,6 +85,7 @@ flutter:
     - lib/assets/images/png/
     - lib/assets/images/png/facebook-icon.png
     - lib/assets/images/png/google-icon.png
+    - lib/assets/images/auth/resetPassword.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

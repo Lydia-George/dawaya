@@ -4,7 +4,8 @@ class DText{
   static const String skip = "Skip";
   static const String done = "Done";
   static const String submit = "Submit";
-  static const String tContinue = "Continue";
+  static const String dContinue = "Continue";
+  static const String reset = "Reset Now";
 
 
   /// --OnBoarding Texts
@@ -39,10 +40,12 @@ class DText{
   static const String confirmPassword = "Confirm Password";
   static const String confirmPasswordHint = 'Re-type your password';
   static const String newPassword = "New Password";
+  static const String newPasswordHint = "Enter New Password";
   static const String username = "Username";
   static const String phoneNo = "Phone Number";
   static const String rememberMe = "Remember Me";
   static const String forgotPassword = "Forgot Password?";
+  static const String resetPassword = "Reset Password?";
   static const String signUp = "Sign Up";
   static const String signIn = "Sign In";
   static const String createAccount = "Create Account";

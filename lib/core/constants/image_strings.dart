@@ -12,4 +12,5 @@ class DImageStrings {
   static const String signUpImage = 'lib/assets/images/auth/signup.jpg';
   static const String loginImage = 'lib/assets/images/auth/login.jpg';
   static const String forgetPassword = 'lib/assets/images/auth/forgetPassword.jpg';
+  static const String resetPassword = 'lib/assets/images/auth/resetPassword.jpg';
 }
