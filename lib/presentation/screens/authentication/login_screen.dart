@@ -11,6 +11,7 @@ import 'package:dawaya/presentation/screens/authentication/widgets/login_form.da
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_forgetPass.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
+import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,80 +20,99 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (c) => AuthCubit(AuthRepository()),
-      child: BlocConsumer<AuthCubit, AuthState>(
-
-        listener: (context, state){},
-        builder: (context, state){
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(DSizes.defaultSpace),
-                child: Column(
-                  children: [
-                    /// --IMAGE
-                    Align(
-                      alignment: Alignment.center,
-                      child: Image(
-                        image: AssetImage(DImageStrings.loginImage),
-                        height: MediaQuery.of(context).size.height * 0.30,
-                      ),
-                    ),
-                    SizedBox(height: 25),
-
-                    /// SIGN In TXT
-                    AlignTitleSubTitle(
-                      titleTxt: DText.signIn,
-                      textSize: DSizes.fontSizeLg,
-                      textColor: DColors.blueLinear2,
-                    ),
-
-                    /// -- SIGN IN TITLE
-                    AlignTitleSubTitle(
-                      titleTxt: DText.loginTitle,
-                      textSize: DSizes.fontSizeMd,
-                      textColor: DColors.blueLinear1,
-                    ),
-
-                    /// -- SIGN IN SUB-TITLE
-                    AlignTitleSubTitle(
-                      titleTxt: DText.loginSubTitle,
-                      textSize: DSizes.fontSizeSm,
-                      textColor: DColors.pestLinear1,
-                    ),
-                    SizedBox(height: DSizes.spaceBtwSections),
-
-                    /// -- LOGIN FORM
-                    LoginForm(),
-
-                    /// -- REMEMBER ME & FORGOT PASS
-                    RememberMeAndForgetPass(),
-                    SizedBox(height: DSizes.spaceBtwItems,),
-
-                    /// -- SIGN IN BUTTON
-                    AuthButtons(btnText: DText.signIn),
-                    SizedBox(height: DSizes.spaceBtwItems,),
-
-                    /// -- OR CONTINUE WITH
-                    OrSignUpInLine(),
-                    SizedBox(height: DSizes.spaceBtwItems,),
-
-                    /// -- SOCIAL BUTTONS
-                    SocialButtons(),
-
-                    /// -- DON'T HAVE ACCOUNT
-                    DontHaveAcc(),
-
-                  ],
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(DSizes.defaultSpace),
+          child: Column(
+            children: [
+              /// --IMAGE
+              Align(
+                alignment: Alignment.center,
+                child: Image(
+                  image: AssetImage(DImageStrings.loginImage),
+                  height: MediaQuery.of(context).size.height * 0.30,
                 ),
               ),
-            ),
-          );
-        },
+              SizedBox(height: 25),
+
+              /// SIGN In TXT
+              AlignTitleSubTitle(
+                titleTxt: DText.signIn,
+                textSize: DSizes.fontSizeLg,
+                textColor: DColors.blueLinear2,
+              ),
+
+              /// -- SIGN IN TITLE
+              AlignTitleSubTitle(
+                titleTxt: DText.loginTitle,
+                textSize: DSizes.fontSizeMd,
+                textColor: DColors.blueLinear1,
+              ),
+
+              /// -- SIGN IN SUB-TITLE
+              AlignTitleSubTitle(
+                titleTxt: DText.loginSubTitle,
+                textSize: DSizes.fontSizeSm,
+                textColor: DColors.pestLinear1,
+              ),
+              SizedBox(height: DSizes.spaceBtwSections),
+
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (h) => HomeScreen()),
+                    );
+                  }
+                  if (state is AuthError) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.message)));
+                  }
+                },
+                builder: (context, state) {
+                  /// -- SIGN IN BUTTON
+                  return AuthButtons(
+                    btnText: DText.signIn,
+                    onPressed: () {
+                      context.read<AuthCubit>().login(
+                        emailController.text,
+                        passwordController.text,
+                      );
+                    },
+                  );
+                },
+              ),
+              SizedBox(height: DSizes.spaceBtwItems),
+
+              /// -- LOGIN FORM
+              LoginForm(
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
+
+              /// -- REMEMBER ME & FORGOT PASS
+              RememberMeAndForgetPass(),
+              SizedBox(height: DSizes.spaceBtwItems),
+
+              /// -- OR CONTINUE WITH
+              OrSignUpInLine(),
+              SizedBox(height: DSizes.spaceBtwItems),
+
+              /// -- SOCIAL BUTTONS
+              SocialButtons(),
+
+              /// -- DON'T HAVE ACCOUNT
+              DontHaveAcc(),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-
-

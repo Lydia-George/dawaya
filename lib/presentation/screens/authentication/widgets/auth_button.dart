@@ -3,11 +3,13 @@ import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class AuthButtons extends StatelessWidget {
-  String btnText;
+  final String btnText;
+  final VoidCallback onPressed;
 
-   AuthButtons({
+   const AuthButtons({
      super.key,
     required this.btnText,
+     required this.onPressed
    });
 
   @override
@@ -21,7 +23,7 @@ class AuthButtons extends StatelessWidget {
         )
 
       ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Center(
           child: Text(
             btnText,
