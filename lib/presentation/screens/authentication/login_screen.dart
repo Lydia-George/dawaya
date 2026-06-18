@@ -2,82 +2,94 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
+import 'package:dawaya/data/repositories/auth_repo.dart';
+import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/dont_have_acc.dart';
-
 import 'package:dawaya/presentation/screens/authentication/widgets/login_form.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_forgetPass.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(DSizes.defaultSpace),
-        child: Column(
-          children: [
-            /// --IMAGE
-            Align(
-              alignment: Alignment.center,
-              child: Image(
-                image: AssetImage(DImageStrings.loginImage),
-                height: MediaQuery.of(context).size.height * 0.30,
+    return BlocProvider(create: (c) => AuthCubit(AuthRepository()),
+      child: BlocConsumer<AuthCubit, AuthState>(
+
+        listener: (context, state){},
+        builder: (context, state){
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(DSizes.defaultSpace),
+                child: Column(
+                  children: [
+                    /// --IMAGE
+                    Align(
+                      alignment: Alignment.center,
+                      child: Image(
+                        image: AssetImage(DImageStrings.loginImage),
+                        height: MediaQuery.of(context).size.height * 0.30,
+                      ),
+                    ),
+                    SizedBox(height: 25),
+
+                    /// SIGN In TXT
+                    AlignTitleSubTitle(
+                      titleTxt: DText.signIn,
+                      textSize: DSizes.fontSizeLg,
+                      textColor: DColors.blueLinear2,
+                    ),
+
+                    /// -- SIGN IN TITLE
+                    AlignTitleSubTitle(
+                      titleTxt: DText.loginTitle,
+                      textSize: DSizes.fontSizeMd,
+                      textColor: DColors.blueLinear1,
+                    ),
+
+                    /// -- SIGN IN SUB-TITLE
+                    AlignTitleSubTitle(
+                      titleTxt: DText.loginSubTitle,
+                      textSize: DSizes.fontSizeSm,
+                      textColor: DColors.pestLinear1,
+                    ),
+                    SizedBox(height: DSizes.spaceBtwSections),
+
+                    /// -- LOGIN FORM
+                    LoginForm(),
+
+                    /// -- REMEMBER ME & FORGOT PASS
+                    RememberMeAndForgetPass(),
+                    SizedBox(height: DSizes.spaceBtwItems,),
+
+                    /// -- SIGN IN BUTTON
+                    AuthButtons(btnText: DText.signIn),
+                    SizedBox(height: DSizes.spaceBtwItems,),
+
+                    /// -- OR CONTINUE WITH
+                    OrSignUpInLine(),
+                    SizedBox(height: DSizes.spaceBtwItems,),
+
+                    /// -- SOCIAL BUTTONS
+                    SocialButtons(),
+
+                    /// -- DON'T HAVE ACCOUNT
+                    DontHaveAcc(),
+
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 25),
-
-            /// SIGN In TXT
-            AlignTitleSubTitle(
-              titleTxt: DText.signIn,
-              textSize: DSizes.fontSizeLg,
-              textColor: DColors.blueLinear2,
-            ),
-
-            /// -- SIGN IN TITLE
-            AlignTitleSubTitle(
-              titleTxt: DText.loginTitle,
-              textSize: DSizes.fontSizeMd,
-              textColor: DColors.blueLinear1,
-            ),
-
-            /// -- SIGN IN SUB-TITLE
-            AlignTitleSubTitle(
-              titleTxt: DText.loginSubTitle,
-              textSize: DSizes.fontSizeSm,
-              textColor: DColors.pestLinear1,
-            ),
-            SizedBox(height: DSizes.spaceBtwSections),
-
-            /// -- LOGIN FORM
-            LoginForm(),
-
-            /// -- REMEMBER ME & FORGOT PASS
-            RememberMeAndForgetPass(),
-            SizedBox(height: DSizes.spaceBtwItems,),
-
-            /// -- SIGN IN BUTTON
-            AuthButtons(btnText: DText.signIn),
-            SizedBox(height: DSizes.spaceBtwItems,),
-
-            /// -- OR CONTINUE WITH
-            OrSignUpInLine(),
-            SizedBox(height: DSizes.spaceBtwItems,),
-
-            /// -- SOCIAL BUTTONS
-            SocialButtons(),
-
-            /// -- DON'T HAVE ACCOUNT
-            DontHaveAcc(),
-
-          ],
-        ),
+          );
+        },
       ),
     );
   }

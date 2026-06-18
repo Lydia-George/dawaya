@@ -1,29 +1,31 @@
 import 'package:dawaya/core/constants/app_colors.dart';
-import 'package:dawaya/core/constants/app_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AuthField extends StatelessWidget {
 
+
+  final TextEditingController? controller;
   final String labelText;
   final String hintText;
-  TextInputType? textInputType;
-  Icon icon;
-  bool isObscure;
+  final TextInputType? textInputType;
+  final Icon icon;
+  final bool isObscure;
 
-   AuthField({
+
+  const  AuthField({
     super.key,
     required this.labelText,
     required this.hintText,
      this.textInputType,
      required this.icon,
      this.isObscure=false,
+      this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType:textInputType,
       obscureText: isObscure,
       decoration: InputDecoration(

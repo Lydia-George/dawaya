@@ -1,5 +1,6 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
+import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class DontHaveAcc extends StatelessWidget {
@@ -10,18 +11,19 @@ class DontHaveAcc extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(DText.dontHaveAcc,
-          style: TextStyle(
-              color: DColors.dGrey1
-          ),),
+        Text(DText.dontHaveAcc, style: TextStyle(color: DColors.dGrey1)),
         TextButton(
-            onPressed: () {},
-            child: Text(
-              DText.signUp,
-              style: TextStyle(
-                color: DColors.primaryColorBlue,
-              ),
-            )),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (s) => SignUpScreen()),
+            );
+          },
+          child: Text(
+            DText.signUp,
+            style: TextStyle(color: DColors.primaryColorBlue),
+          ),
+        ),
       ],
     );
   }

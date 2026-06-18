@@ -1,5 +1,6 @@
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
+import 'package:dawaya/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: OnboardingScreen(),
     );
   }
 }

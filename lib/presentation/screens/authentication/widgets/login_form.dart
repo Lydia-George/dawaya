@@ -1,11 +1,18 @@
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  final TextEditingController emailController;
+
+  final TextEditingController passwordController;
+
+ const LoginForm({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +20,7 @@ class LoginForm extends StatelessWidget {
       children: [
         /// -- EMAIL
         AuthField(
+          controller: emailController,
           labelText: DText.email,
           hintText: DText.hintEmail,
           textInputType: TextInputType.emailAddress,
@@ -22,13 +30,13 @@ class LoginForm extends StatelessWidget {
 
         /// -- PASSWORD
         AuthField(
+          controller: passwordController,
           labelText: DText.password,
           hintText: DText.hintPassword,
           icon: Icon(Icons.lock_outlined),
           isObscure: true,
         ),
         SizedBox(height: DSizes.spaceBtwItems),
-
       ],
     );
   }

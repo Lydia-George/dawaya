@@ -1,7 +1,7 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/onboarding/onboarding_cubit.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class NextSkipBtn extends StatelessWidget {
@@ -24,13 +24,15 @@ class NextSkipBtn extends StatelessWidget {
             color: DColors.whiteTxt,
             fontSize: 16,
             fontWeight: FontWeight.w600,
+
           ),),),
 
         ElevatedButton(
-            onPressed: (){
-              if(obj.isLastPage){
-                Navigator.pushReplacementNamed(context, '/login');
-              }else{
+            onPressed: () {
+              if (obj.isLastPage) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (l) => LoginScreen()));
+              } else {
                 obj.nextPage();
               }
             },
@@ -46,7 +48,7 @@ class NextSkipBtn extends StatelessWidget {
                 )
             ),
 
-            child: Text(obj.isLastPage? 'Get Started' : 'Next',
+            child: Text(obj.isLastPage ? 'Get Started' : 'Next',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
