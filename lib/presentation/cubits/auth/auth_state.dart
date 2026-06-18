@@ -9,3 +9,4 @@ class AuthError extends AuthState{
   final String message;
   AuthError(this.message);
 }
+class PasswordResetEmailSent extends AuthState{}

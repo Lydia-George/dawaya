@@ -1,5 +1,6 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
+import 'package:dawaya/presentation/screens/authentication/forgot_and_reset_password/forgot_password.dart';
 import 'package:flutter/material.dart';
 
 class RememberMeAndForgetPass extends StatelessWidget {
@@ -20,8 +21,12 @@ class RememberMeAndForgetPass extends StatelessWidget {
         ),),
         Spacer(),
         TextButton(
-            onPressed: () {},
-            child: Text(DText.forgetPassword,
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (f)=> ForgotPassword(
+
+              )));
+            },
+            child: Text(DText.forgotPassword,
               style: TextStyle(
                   color: DColors.primaryColorBlue
               ),

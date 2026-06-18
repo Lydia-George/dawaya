@@ -58,13 +58,7 @@ class AuthField extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           //  borderSide: BorderSide(color: DColors.dGrey1),
           ),
-        suffixIcon: IconButton(
-            onPressed: (){
-              if( isObscure == true){
-                isObscure == false ;
-              }
-            },
-            icon: Icon(CupertinoIcons.eye))
+
 
 
       ),

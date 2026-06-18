@@ -62,7 +62,7 @@ class SignUpScreen extends StatelessWidget {
               SignUpForm(),
 
               /// -- SIGNUP BUTTON
-              AuthButtons(btnText: DText.signUp),
+              AuthButtons(btnText: DText.signUp, onPressed: () {  },),
               SizedBox(height: DSizes.spaceBtwItems),
 
               /// -- OR CONTINUE WITH DIVIDER

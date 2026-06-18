@@ -15,5 +15,13 @@ class AuthRepository {
       email: email,
       password: password,
     );
+
+
   }
+
+  Future<void> resetPassword (String email) async {
+    return await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+
+
 }
