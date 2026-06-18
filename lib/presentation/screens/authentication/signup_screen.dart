@@ -54,11 +54,12 @@ class SignUpScreen extends StatelessWidget {
                 textSize: DSizes.fontSizeSm,
                 textColor: DColors.pestLinear1,
               ),
+
               SizedBox(height: DSizes.spaceBtwSections),
 
 
-             /// -- Form Fields
-             SignUpForm(),
+              /// -- Form Fields
+              SignUpForm(),
 
               /// -- SIGNUP BUTTON
               AuthButtons(btnText: DText.signUp),

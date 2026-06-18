@@ -56,6 +56,7 @@ class DText{
   static const String resendEmail = "Resend Email";
   static const String resendEmailIn = "Resend email in";
   static const String alreadyHaveAcc ='Already have an account?';
+  static const String dontHaveAcc ='Don\'t have an account?';
 
 
   // -- Authentication Headings

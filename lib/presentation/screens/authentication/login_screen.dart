@@ -4,9 +4,12 @@ import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
-import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/dont_have_acc.dart';
+
 import 'package:dawaya/presentation/screens/authentication/widgets/login_form.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_forgetPass.dart';
+import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -57,6 +60,21 @@ class LoginScreen extends StatelessWidget {
 
             /// -- REMEMBER ME & FORGOT PASS
             RememberMeAndForgetPass(),
+            SizedBox(height: DSizes.spaceBtwItems,),
+
+            /// -- SIGN IN BUTTON
+            AuthButtons(btnText: DText.signIn),
+            SizedBox(height: DSizes.spaceBtwItems,),
+
+            /// -- OR CONTINUE WITH
+            OrSignUpInLine(),
+            SizedBox(height: DSizes.spaceBtwItems,),
+
+            /// -- SOCIAL BUTTONS
+            SocialButtons(),
+
+            /// -- DON'T HAVE ACCOUNT
+            DontHaveAcc(),
 
           ],
         ),
