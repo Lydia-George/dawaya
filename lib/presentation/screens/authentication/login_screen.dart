@@ -2,7 +2,6 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
-import 'package:dawaya/data/repositories/auth_repo.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
