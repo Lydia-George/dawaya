@@ -31,6 +31,7 @@ class AuthField extends StatelessWidget {
       obscureText: isObscure,
       decoration: InputDecoration(
 
+
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
