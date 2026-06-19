@@ -1,7 +1,5 @@
 import 'package:dawaya/data/repositories/auth_repo.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
-import 'package:dawaya/presentation/screens/authentication/forgot_and_reset_password/forgot_password.dart';
-import 'package:dawaya/presentation/screens/authentication/forgot_and_reset_password/reset_password.dart';
 import 'package:dawaya/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // AuthGate()
-      home: ResetPasswordScreen(),
+      home: OnboardingScreen(),
     );
   }
 }

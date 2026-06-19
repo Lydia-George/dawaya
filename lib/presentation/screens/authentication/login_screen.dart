@@ -62,28 +62,31 @@ class LoginScreen extends StatelessWidget {
 
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
-                  if (state is AuthSuccess) {
+                  if (state.isSuccess) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (h) => HomeScreen()),
                     );
                   }
-                  if (state is AuthError) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(state.message)));
+                  if (state.errorMessage != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.errorMessage!)),
+                    );
                   }
                 },
                 builder: (context, state) {
                   /// -- SIGN IN BUTTON
                   return AuthButtons(
                     btnText: DText.signIn,
-                    onPressed: () {
-                      context.read<AuthCubit>().login(
-                        emailController.text,
-                        passwordController.text,
-                      );
-                    },
+
+                    onPressed: state.isLoading
+                        ? null
+                        : () {
+                            context.read<AuthCubit>().login(
+                              emailController.text,
+                              passwordController.text,
+                            );
+                          },
                   );
                 },
               ),

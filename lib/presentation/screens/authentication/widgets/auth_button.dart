@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AuthButtons extends StatelessWidget {
   final String btnText;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
    const AuthButtons({
      super.key,
