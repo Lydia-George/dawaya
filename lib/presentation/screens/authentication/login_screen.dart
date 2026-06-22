@@ -60,6 +60,19 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: DSizes.spaceBtwSections),
 
+              
+
+              /// -- LOGIN FORM
+              LoginForm(
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
+
+              /// -- REMEMBER ME & FORGOT PASS
+              RememberMeAndForgetPass(),
+              SizedBox(height: DSizes.spaceBtwItems),
+
+              /// -- SIGN IN BUTTON
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state.isSuccess) {
@@ -75,7 +88,6 @@ class LoginScreen extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  /// -- SIGN IN BUTTON
                   return AuthButtons(
                     btnText: DText.signIn,
 
@@ -90,16 +102,6 @@ class LoginScreen extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(height: DSizes.spaceBtwItems),
-
-              /// -- LOGIN FORM
-              LoginForm(
-                emailController: emailController,
-                passwordController: passwordController,
-              ),
-
-              /// -- REMEMBER ME & FORGOT PASS
-              RememberMeAndForgetPass(),
               SizedBox(height: DSizes.spaceBtwItems),
 
               /// -- OR CONTINUE WITH
