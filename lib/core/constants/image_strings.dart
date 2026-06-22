@@ -26,5 +26,13 @@ class DImageStrings {
   static const String seifBanner3 = 'lib/assets/images/jpg/banners/seif_banner3.png';
   static const String drWellsBanner4 = 'lib/assets/images/jpg/banners/drWells_banner4.jpg';
 
+  /// -- CATEGORIES IMAGES
+  static const String pillsImg = 'lib/assets/images/jpg/categories_imgs/pills.jpg';
+  static const String antibiotic = 'lib/assets/images/jpg/categories_imgs/Antibiotics.jpg';
+  static const String vitamins ='lib/assets/images/jpg/categories_imgs/Vitamins.jpg';
+  static const String respiratory ='lib/assets/images/jpg/categories_imgs/Respiratory.jpg';
+  static const String hairCare = 'lib/assets/images/jpg/categories_imgs/Hair Care.jpg';
+  static const String skinCare= 'lib/assets/images/jpg/categories_imgs/Skin Care.jpg';
+
 
 }
