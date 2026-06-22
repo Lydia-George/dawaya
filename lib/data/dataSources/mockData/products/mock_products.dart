@@ -237,6 +237,5 @@ final List<ProductModel> mockProducts = [
 
 
 
-  // ضيفي باقي الـ 19 منتج بنفس الـ pattern ده
-  // categoryId '4' = Respiratory, '5' = Hair Care, '6' = Skin Care
+
 ];
