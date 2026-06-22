@@ -104,6 +104,30 @@ flutter:
     - lib/assets/images/jpg/categories_imgs/Vitamins.jpg
     - lib/assets/images/jpg/categories_imgs/Hair Care.jpg
     - lib/assets/images/jpg/categories_imgs/Skin Care.jpg
+    - lib/assets/images/jpg/products/
+    - lib/assets/images/jpg/products/Paracetamol 500mg.jpeg
+    - lib/assets/images/jpg/products/Amoxicillin 250mg.jpeg
+    - lib/assets/images/jpg/products/Azithromycin 500mg.jpeg
+    - lib/assets/images/jpg/products/Vitamin C 1000mg.jpeg
+    - lib/assets/images/jpg/products/Vitamin D3 5000IU.jpeg
+    - lib/assets/images/jpg/products/Voltaren Gel.jpg
+    - lib/assets/images/jpg/products/ketofanGel.jpeg
+    - lib/assets/images/jpg/products/Ibuprofen 400mg.jpeg
+    - lib/assets/images/jpg/products/cefixime.jpeg
+    - lib/assets/images/jpg/products/augmentin1g.jpeg
+    - lib/assets/images/jpg/products/multivitamin.jpeg
+    - lib/assets/images/jpg/products/omega3.jpeg
+    - lib/assets/images/jpg/products/Otrivin Nasal Spray.jpeg
+    - lib/assets/images/jpg/products/Ventolin Inhaler.jpeg
+    - lib/assets/images/jpg/products/mucosolSyrup.jpeg
+    - lib/assets/images/jpg/products/strepsils.jpeg
+    - lib/assets/images/jpg/products/vichyDercosShampoo.jpeg
+    - lib/assets/images/jpg/products/panthenolHairCream.jpeg
+    - lib/assets/images/jpg/products/arganHairSerum.jpeg
+    - lib/assets/images/jpg/products/ceraveMoisturizingCream.jpeg
+    - lib/assets/images/jpg/products/laRochePosayCleanser.jpeg
+    - lib/assets/images/jpg/products/panthenolCream.jpeg
+    - lib/assets/images/jpg/products/neutrogenaHydroBoost.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
