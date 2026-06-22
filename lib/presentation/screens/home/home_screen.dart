@@ -1,4 +1,5 @@
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
+import 'package:dawaya/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +25,11 @@ class HomeScreen extends StatelessWidget {
             return ListView(
               padding: EdgeInsets.symmetric(vertical: 16),
               children: [
+
+                /// -- BANNERS
+                BannerCarousel(),
+
+
 
               ],
             );

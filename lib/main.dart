@@ -3,6 +3,7 @@ import 'package:dawaya/firebase_options.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
+import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:dawaya/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ void main() async {
         ),
       BlocProvider(create: (_) => PharmacyCubit()..getPharmacies())
       ],
-      child: const AuthGate(),
+      child: const MyApp(),
     ),
   );
 }
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // AuthGate()
-      home: OnboardingScreen(),
+      home: HomeScreen(),
     );
   }
 }

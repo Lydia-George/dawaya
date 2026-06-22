@@ -92,6 +92,11 @@ flutter:
     - lib/assets/images/jpg/pharmacies_logos/tarshouby.jpg
     - lib/assets/images/jpg/pharmacies_logos/seif.jpg
     - lib/assets/images/jpg/pharmacies_logos/DrWells.jpg
+    - lib/assets/images/jpg/banners/
+    - lib/assets/images/jpg/banners/ezaby_banner1.jpeg
+    - lib/assets/images/jpg/banners/tarshouby_banner2.jpg
+    - lib/assets/images/jpg/banners/seif_banner3.png
+    - lib/assets/images/jpg/banners/drWells_banner4.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

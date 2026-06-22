@@ -53,23 +53,23 @@ class ForgotPassword extends StatelessWidget {
 
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
-                if (state is PasswordResetEmailSent) {
+                if (state.isPasswordResetSent) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(DText.resetPasswordTitle)),
                   );
                   Navigator.pop(context);
                 }
-                if (state is AuthError) {
+                if (state.errorMessage!=null) {
                   ScaffoldMessenger.of(
                     context,
-                  ).showSnackBar(SnackBar(content: Text(state.message)));
+                  ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
                 }
               },
               builder: (context, state) {
                 return AuthButtons(
                   btnText: DText.submit,
                   onPressed: () {
-                    state is AuthLoading
+                    state.isLoading
                         ? null
                         : () => context.read<AuthCubit>().resetPassword(
                             emailController.text,

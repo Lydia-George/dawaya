@@ -20,5 +20,11 @@ class DImageStrings {
   static const String seifLogo = 'lib/assets/images/jpg/pharmacies_logos/seif.jpg';
   static const String drWellsLogo = 'lib/assets/images/jpg/pharmacies_logos/DrWells.jpg';
 
+  /// -- BANNERS
+  static const String ezabyBanner1 = 'lib/assets/images/jpg/banners/ezaby_banner1.jpeg';
+  static const String tarshoubyBanner2 = 'lib/assets/images/jpg/banners/tarshouby_banner2.jpg';
+  static const String seifBanner3 = 'lib/assets/images/jpg/banners/seif_banner3.png';
+  static const String drWellsBanner4 = 'lib/assets/images/jpg/banners/drWells_banner4.jpg';
+
 
 }
