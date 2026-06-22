@@ -80,5 +80,6 @@ class DText{
   static const String yourAccountCreatedSubTitle = "Welcome to Dawaya! Your account is ready — find your medications, compare prices, and order from top pharmacies near you.";
 
 
-
+  /// -- HOME SCREEN TEXTS
+  static const String pharmaciesNearYou = 'Pharmacies Near You';
 }
