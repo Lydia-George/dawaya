@@ -1,6 +1,6 @@
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
-import 'package:dawaya/data/models/onboard_model.dart';
+import 'package:dawaya/data/models/onboarding/onboard_model.dart';
 
 final onboardList = [
   OnboardModel(title: DText.onBoardingTitle1, subTitle: DText.onBoardingSubTitle1, imageUrl: DImageStrings.onboardingImage1),
