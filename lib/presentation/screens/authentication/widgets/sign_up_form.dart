@@ -5,7 +5,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({super.key});
+  final TextEditingController fullNameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+
+  const SignUpForm({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+    required this.fullNameController,
+    required this.confirmPasswordController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +24,7 @@ class SignUpForm extends StatelessWidget {
       children: [
         /// -- FULL NAME
         AuthField(
+          controller: fullNameController,
           labelText: DText.fullName,
           hintText: DText.fullNameHint,
           textInputType: TextInputType.name,
@@ -22,6 +34,7 @@ class SignUpForm extends StatelessWidget {
 
         /// -- EMAIL
         AuthField(
+          controller: emailController,
           labelText: DText.email,
           hintText: DText.hintEmail,
           textInputType: TextInputType.emailAddress,
@@ -31,6 +44,7 @@ class SignUpForm extends StatelessWidget {
 
         /// -- PASSWORD
         AuthField(
+          controller: passwordController,
           labelText: DText.password,
           hintText: DText.hintPassword,
           icon: Icon(Icons.lock_outlined),
@@ -40,6 +54,7 @@ class SignUpForm extends StatelessWidget {
 
         /// -- CONFIRM PASSWORD
         AuthField(
+          controller: confirmPasswordController,
           labelText: 'Confirm Password',
           hintText: DText.confirmPasswordHint,
           icon: Icon(Icons.lock_outlined),

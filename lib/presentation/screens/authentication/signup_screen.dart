@@ -2,19 +2,27 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
+import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/already_have_account.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/sign_up_form.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
+import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final fullNameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final confirmPasswordController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -57,12 +65,54 @@ class SignUpScreen extends StatelessWidget {
 
               SizedBox(height: DSizes.spaceBtwSections),
 
-
               /// -- Form Fields
-              SignUpForm(),
+              SignUpForm(
+                fullNameController: fullNameController,
+                emailController: emailController,
+                passwordController: passwordController,
+                confirmPasswordController: confirmPasswordController,
+              ),
 
               /// -- SIGNUP BUTTON
-              AuthButtons(btnText: DText.signUp, onPressed: () {  },),
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state.isSuccess) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (h) => HomeScreen()),
+                    );
+                  }
+                  if (state.errorMessage != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.errorMessage!)),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return AuthButtons(
+                    btnText: DText.signUp,
+                    onPressed: () {
+                      state.isLoading
+                          ? null
+                          : () {
+                              if (passwordController.text !=
+                                  confirmPasswordController.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Password do not match !!'),
+                                  ),
+                                );
+                                return;
+                              }
+                              context.read<AuthCubit>().register(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                            };
+                    },
+                  );
+                },
+              ),
               SizedBox(height: DSizes.spaceBtwItems),
 
               /// -- OR CONTINUE WITH DIVIDER
@@ -71,12 +121,8 @@ class SignUpScreen extends StatelessWidget {
               /// -- SOCIAL BUTTONS
               SocialButtons(),
 
-
               /// -- ALREADY HAVE ACCOUNT
               AlreadyHaveAccount(),
-
-
-
             ],
           ),
         ),
