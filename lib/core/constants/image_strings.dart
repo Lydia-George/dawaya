@@ -13,4 +13,12 @@ class DImageStrings {
   static const String loginImage = 'lib/assets/images/auth/login.jpg';
   static const String forgetPassword = 'lib/assets/images/auth/forgetPassword.jpg';
   static const String resetPassword = 'lib/assets/images/auth/resetPassword.jpg';
+
+  /// -- PHARMACIES LOGOS
+  static const String ezabyLogo = 'lib/assets/images/jpg/pharmacies_logos/ezaby.jpg';
+  static const String tarshoubyLogo = 'lib/assets/images/jpg/pharmacies_logos/tarshouby.jpg';
+  static const String seifLogo = 'lib/assets/images/jpg/pharmacies_logos/seif.jpg';
+  static const String drWellsLogo = 'lib/assets/images/jpg/pharmacies_logos/DrWells.jpg';
+
+
 }

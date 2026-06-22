@@ -87,6 +87,11 @@ flutter:
     - lib/assets/images/png/facebook-icon.png
     - lib/assets/images/png/google-icon.png
     - lib/assets/images/auth/resetPassword.jpg
+    - lib/assets/images/jpg/pharmacies_logos/
+    - lib/assets/images/jpg/pharmacies_logos/ezaby.jpg
+    - lib/assets/images/jpg/pharmacies_logos/tarshouby.jpg
+    - lib/assets/images/jpg/pharmacies_logos/seif.jpg
+    - lib/assets/images/jpg/pharmacies_logos/DrWells.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

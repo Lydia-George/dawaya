@@ -1,6 +1,25 @@
 part of 'pharmacy_cubit.dart';
 
-@immutable
-sealed class PharmacyState {}
+class PharmacyState {
+  final bool isLoading;
+  final List<PharmacyModel> pharmacies;
+  final String? errorMessage;
 
-final class PharmacyInitial extends PharmacyState {}
+  const PharmacyState({
+    this.isLoading = false,
+    this.pharmacies = const [],
+    this.errorMessage,
+  });
+
+  PharmacyState copyWith({
+    bool? isLoading,
+    List<PharmacyModel>? pharmacies,
+    String? errorMessage,
+  }) {
+    return PharmacyState(
+      isLoading: isLoading ?? false,
+      pharmacies: pharmacies ?? this.pharmacies,
+      errorMessage: errorMessage,
+    );
+  }
+}

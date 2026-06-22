@@ -72,5 +72,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
 
+  /// -- LOGOUT
+  Future<void> logout() async{
+    emit(AuthState()); // return initial value of state
+  }
+
 
 }

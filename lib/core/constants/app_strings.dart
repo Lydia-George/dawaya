@@ -65,6 +65,7 @@ class DText{
   // -- Authentication Headings
   static const String loginTitle = "Welcome back,";
   static const String login = "Log In";
+  static const String logout = "Log Out";
   static const String loginSubTitle = "Give credential to sign in your account ";
   static const String signupTitle = "Let’s create your account";
   static const String signupSubTitle = "Give credential to sign up your account ";
