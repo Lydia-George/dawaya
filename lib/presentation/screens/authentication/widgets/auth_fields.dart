@@ -29,6 +29,9 @@ class AuthField extends StatelessWidget {
       controller: controller,
       keyboardType:textInputType,
       obscureText: isObscure,
+      style: TextStyle(
+        color: DColors.primaryColorBlue
+      ),
       decoration: InputDecoration(
 
 
