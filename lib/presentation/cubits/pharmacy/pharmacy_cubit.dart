@@ -1,4 +1,4 @@
-import 'package:dawaya/data/dataSources/mockData/mock_pharmacies.dart';
+import 'package:dawaya/data/dataSources/mockData/pharmacies/mock_pharmacies.dart';
 import 'package:dawaya/data/models/pharmacy/pharmacy_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
