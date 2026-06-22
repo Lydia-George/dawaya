@@ -232,10 +232,4 @@ final List<ProductModel> mockProducts = [
     prices: {'1': 310.0, '2': 320.0, '3': 305.0, '4': 315.0},
     availability: {'1': true, '2': true, '3': true, '4': true},
   ),
-
-
-
-
-
-
 ];
