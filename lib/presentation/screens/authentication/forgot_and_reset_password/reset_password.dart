@@ -2,10 +2,12 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
+import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   const ResetPasswordScreen({super.key});
@@ -37,6 +39,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 hintText: DText.newPasswordHint,
                 icon: Icon(CupertinoIcons.lock),
                 isObscure: true,
+                onChanged: (value) => context.read<AuthCubit>().onPasswordChanged(value),
               ),
               Spacer(),
 
@@ -46,6 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 hintText: DText.confirmPasswordHint,
                 icon: Icon(CupertinoIcons.lock),
                 isObscure: true,
+                onChanged: (value) => context.read<AuthCubit>().onConfirmPasswordChanged(value),
               ),
               Spacer(),
 
