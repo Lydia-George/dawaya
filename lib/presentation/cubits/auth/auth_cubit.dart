@@ -9,17 +9,47 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._repo) : super(AuthState());
 
+  void onFullNameChanged(String value) => emit(state.copyWith(fullName: value));
+  void onEmailChanged(String value) => emit(state.copyWith(email: value));
+  void onPasswordChanged(String value) => emit(state.copyWith(password: value));
+  void onConfirmPasswordChanged(String value) => emit(state.copyWith(confirmPassword: value));
+
+
+  /// -- REGISTER
+  Future<void> register() async {
+    if(state.fullName.trim().isEmpty){
+      emit(state.copyWith(errorMessage: 'Full name is required'));
+      return;
+    }
+    if(state.password != state.confirmPassword){
+      emit(state.copyWith(errorMessage: 'Password doesn\'t match!!' ));
+      return;
+    }
+    emit(state.copyWith(isLoading: true));
+    try{
+      await _repo.register(state.email, state.password,state.fullName);
+
+      await _repo.logout();
+      emit(state.copyWith(isSuccess: true));
+    }catch(e){
+      emit(state.copyWith(errorMessage: e.toString()));
+    }
+
+
+  }
+
+
 
   /// -- LOG IN
-  Future<void> login(String email, String password) async {
+  Future<void> login() async {
     emit(state.copyWith(isLoading: true));
 
     try {
-      await _repo.login(email, password);
+      await _repo.login(state.email, state.password);
 
       final prefs = await SharedPreferences.getInstance();
       if(state.rememberMe){
-        await prefs.setString('saved_email', email);
+        await prefs.setString('saved_email', state.email);
         await prefs.setBool('remember_me', true);
       }
       else{
@@ -33,22 +63,17 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  /// -- REGISTER
-  Future<void> register(String email, String password) async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      await _repo.register(email, password);
-      emit(state.copyWith(isSuccess: true));
-    } catch (e) {
-      emit(state.copyWith(errorMessage: e.toString()));
-    }
-  }
+
 
   /// -- RESET PASSWORD
   Future<void> resetPassword(String email) async {
+    if(state.email.trim().isEmpty){
+      emit(state.copyWith(errorMessage: 'Please enter your email'));
+      return;
+    }
     emit(state.copyWith(isLoading: true));
     try {
-      await _repo.resetPassword(email);
+      await _repo.resetPassword(state.email);
       emit(state.copyWith(isPasswordResetSent: true));
     } catch (e) {
       emit(state.copyWith(errorMessage: e.toString()));
@@ -75,6 +100,10 @@ class AuthCubit extends Cubit<AuthState> {
   /// -- LOGOUT
   Future<void> logout() async{
     emit(AuthState()); // return initial value of state
+  }
+
+  void resetForm(){
+    emit(AuthState());
   }
 
 
