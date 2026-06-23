@@ -41,7 +41,7 @@ class CategoryGridItem extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.asset(_imageInfo(category.image), width: 120, height: 120)),
+                child: Image.asset(category.image, width: 120, height: 120)),
             SizedBox(height: DSizes.spaceBtwItems),
             Text(
               category.name,
@@ -54,23 +54,5 @@ class CategoryGridItem extends StatelessWidget {
     );
   }
 
-  String _imageInfo(String image) {
-    switch (image) {
-      case 'pills':
-        return DImageStrings.pillsImg;
-      case 'Antibiotics':
-        return DImageStrings.antibiotic;
-      case 'Vitamins':
-        return DImageStrings.vitamins;
-      case 'Respiratory':
-        return DImageStrings.respiratory;
-      case 'hairCare':
-        return DImageStrings.hairCare;
-      case 'Skin Care':
-        return DImageStrings.skinCare;
 
-      default:
-        return DImageStrings.pillsImg;
-    }
-  }
 }

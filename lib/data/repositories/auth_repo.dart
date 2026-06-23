@@ -18,11 +18,19 @@ class AuthRepository {
       email: email,
       password: password,
     );
-    await _firestore.collection('users').doc(credential.user!.uid).set({
-      'fullName' : fullName,
-      'email': email,
-      'createdAt' : FieldValue.serverTimestamp(),
-    });
+
+    try{
+      await _firestore.collection('users').doc(credential.user!.uid).set({
+        'fullName' : fullName,
+        'email' : email,
+        'createdAt' : FieldValue.serverTimestamp(),
+      }).timeout(Duration(
+        seconds: 10
+      ));
+    }catch(e){
+      await credential.user?.delete();
+      rethrow;
+    }
 
     return credential;
   }

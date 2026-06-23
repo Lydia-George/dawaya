@@ -15,11 +15,13 @@ class PharmacyScreen extends StatelessWidget {
       create: (_) => ProductsCubit()..getCategories(pharmacyId),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Pharmacy ',
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium!.apply(color: DColors.primaryColorBlue),
+          title: Center(
+            child: Text(
+              'Categories ',
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium!.apply(color: DColors.primaryColorBlue),
+            ),
           ),
         ),
         body: BlocBuilder<ProductsCubit, ProductsState>(
