@@ -19,114 +19,182 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final price = product.priceAt(pharmacyId);
+    const Color pestBackGround = DColors.primaryColorPest;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          product.name,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium!.apply(color: DColors.primaryColorPest),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(DSizes.defaultSpace),
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                product.image,
-                width: double.infinity,
-                height: 220,
-                fit: BoxFit.cover,
+            Expanded(
+              child: Stack(
+                children: [
+
+                  /// -- BACK BUTTON
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: DColors.primaryColorBlue,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+
+                        /// -- CART BUTTON
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Badge(
+                            label: Text('3'),
+                            child: Icon(
+                              Icons.shopping_basket_outlined,
+                              color: DColors.primaryColorBlue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /// -- product Image
+                  Center(child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 40.0),
+                    child: Image.asset(product.image,
+                      fit: BoxFit.contain,
+                    ),
+                  ),),
+
+                  /// -- Sizes : 30 , 60, 90
+                  Positioned(
+                      right: 16,
+                      bottom: 20,
+                      child: Column(
+                        children: [
+                          _buildSizeOption('30', isSelected: true),
+                          SizedBox(height: DSizes.spaceBtwItems,),
+                          _buildSizeOption('60', isSelected: false),
+                          SizedBox(height: DSizes.spaceBtwItems,),
+                          _buildSizeOption('90', isSelected: false),
+                        ],
+                      )),
+                ],
               ),
             ),
-            SizedBox(height: DSizes.spaceBtwItems),
-            Text(
-              product.name,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge!.apply(color: DColors.primaryColorBlue),
-            ),
-            SizedBox(height: DSizes.sm),
-            Text(
-              '$price EGP',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.apply(color: DColors.dGreen),
-            ),
-            SizedBox(height: DSizes.spaceBtwItems),
-            Text(
-              product.description,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium!.apply(color: DColors.dGrey1),
-            ),
-            Spacer(),
-            SizedBox(
+
+            /// -- WHITE CONTAINER
+            Container(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  final cartCubit = context.read<CartCubit>();
-                  final added = cartCubit.addItem(
-                    pharmacyId: pharmacyId,
-                    item: CartItemModel(
-                      productId: product.id,
-                      name: product.name,
-                      image: product.image,
-                      price: price,
-                    ),
-                  );
-                  if (added) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${product.name} added to cart')),
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: Text('Do you Want to start new order ?'),
-                        content: Text(
-                          'Your cart contains items from a different pharmacy. Adding this item will clear your current cart.',
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+              padding: EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  // product name
+                  Text(
+                    product.name,
+                    style: Theme
+                        .of(
+                      context,
+                    )
+                        .textTheme
+                        .headlineMedium!
+                        .apply(color: DColors.primaryColorBlue),
+                  ),
+                  SizedBox(height: DSizes.sm),
+                  Text(
+                    product.description,
+                    style: Theme
+                        .of(
+                      context,
+                    )
+                        .textTheme
+                        .titleMedium!
+                        .apply(color: DColors.dGrey1),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Text(
+                        '$price EGP',
+                        style: Theme
+                            .of(
+                          context,
+                        )
+                            .textTheme
+                            .headlineMedium!
+                            .apply(color: DColors.dGreen),
+                      ),
+
+                      // Quantity Counter
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6
                         ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              cartCubit.clearAndAddItem(
-                                pharmacyId: pharmacyId,
-                                item: CartItemModel(
-                                  productId: product.id,
-                                  name: product.name,
-                                  image: product.image,
-                                  price: price,
-                                ),
-                              );
-                              Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    '${product.name} added to cart',
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Text('Start New Order'),
-                          ),
+                        decoration: BoxDecoration(
+                          color: DColors.primaryColorBlue,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Row(
+                          children: [
+                            /// -- Minus Button
+                            _buildCounterButton(Icons.remove, () {}),
+                            Padding(padding: EdgeInsets.symmetric(
+                                horizontal: 16),
+                              child: Text('2', style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .apply(color: DColors.primaryColorBlue),),
+                            ),
+
+                            /// -- Add button
+                            _buildCounterButton(Icons.add, (){}),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: DSizes.spaceBtwSections,),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: ()=> _handleAddToCart(context, price),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: DColors.primaryColorBlue,
+                        foregroundColor: DColors.whiteTxt,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(20),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.payment, size: 20,),
+                          SizedBox(width: DSizes.spaceBtwItems,),
+                          Text('Add to cart',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          )
                         ],
                       ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: Text('Add to cart'),
+                    ),
+                  ),
+
+                ],
               ),
             ),
           ],
@@ -134,4 +202,101 @@ class ProductDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildSizeOption(String text, {required bool isSelected}) {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: isSelected ? DColors.primaryColorBlue : DColors.dGrey1,
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: isSelected ? DColors.whiteTxt : DColors.primaryColorBlue,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildCounterButton(IconData icon, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+        padding: EdgeInsets.zero,
+        minimumSize: Size(28, 28),
+        backgroundColor: DColors.darkBlue2,
+        foregroundColor: DColors.primaryColorPest,
+        elevation: 0,
+      ),
+
+      child: Icon(icon, size: 16,),
+
+    );
+  }
+
+
+  void _handleAddToCart(BuildContext context , dynamic price){
+    final cartCubit = context.read<CartCubit>();
+    final added = cartCubit.addItem(
+      pharmacyId: pharmacyId,
+      item: CartItemModel(
+        productId: product.id,
+        name: product.name,
+        image: product.image,
+        price: price,
+      ),
+    );
+    if (added) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${product.name} added to cart')),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) =>
+            AlertDialog(
+              title: Text('Do you Want to start new order ?'),
+              content: Text(
+                'Your cart contains items from a different pharmacy. Adding this item will clear your current cart.',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    cartCubit.clearAndAddItem(
+                      pharmacyId: pharmacyId,
+                      item: CartItemModel(
+                        productId: product.id,
+                        name: product.name,
+                        image: product.image,
+                        price: price,
+                      ),
+                    );
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          '${product.name} added to cart',
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text('Start New Order'),
+                ),
+              ],
+            ),
+      );
+    }  }
+
+
 }
