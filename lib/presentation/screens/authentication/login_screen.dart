@@ -63,10 +63,7 @@ class LoginScreen extends StatelessWidget {
               
 
               /// -- LOGIN FORM
-              LoginForm(
-                emailController: emailController,
-                passwordController: passwordController,
-              ),
+              LoginForm(),
 
               /// -- REMEMBER ME & FORGOT PASS
               RememberMeAndForgetPass(),
@@ -93,12 +90,7 @@ class LoginScreen extends StatelessWidget {
 
                     onPressed: state.isLoading
                         ? null
-                        : () {
-                            context.read<AuthCubit>().login(
-                              emailController.text,
-                              passwordController.text,
-                            );
-                          },
+                        : () => context.read<AuthCubit>().login(),
                   );
                 },
               ),

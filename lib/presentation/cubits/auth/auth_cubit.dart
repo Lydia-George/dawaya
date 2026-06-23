@@ -66,7 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
 
 
   /// -- RESET PASSWORD
-  Future<void> resetPassword(String email) async {
+  Future<void> resetPassword() async {
     if(state.email.trim().isEmpty){
       emit(state.copyWith(errorMessage: 'Please enter your email'));
       return;
