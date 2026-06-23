@@ -3,6 +3,7 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
+import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/already_have_account.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';
@@ -18,11 +19,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullNameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final confirmPasswordController = TextEditingController();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -66,20 +62,21 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(height: DSizes.spaceBtwSections),
 
               /// -- Form Fields
-              SignUpForm(
-                fullNameController: fullNameController,
-                emailController: emailController,
-                passwordController: passwordController,
-                confirmPasswordController: confirmPasswordController,
-              ),
+              SignUpForm(),
 
               /// -- SIGNUP BUTTON
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state.isSuccess) {
-                    Navigator.push(
+                    context.read<AuthCubit>().resetForm();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Account created ! please sign in'),
+                      ),
+                    );
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (h) => HomeScreen()),
+                      MaterialPageRoute(builder: (_) => LoginScreen()),
                     );
                   }
                   if (state.errorMessage != null) {
@@ -91,25 +88,10 @@ class SignUpScreen extends StatelessWidget {
                 builder: (context, state) {
                   return AuthButtons(
                     btnText: DText.signUp,
-                    onPressed: () {
-                      state.isLoading
+                    onPressed:
+                    state.isLoading
                           ? null
-                          : () {
-                              if (passwordController.text !=
-                                  confirmPasswordController.text) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Password do not match !!'),
-                                  ),
-                                );
-                                return;
-                              }
-                              context.read<AuthCubit>().register(
-                                emailController.text,
-                                passwordController.text,
-                              );
-                            };
-                    },
+                          : ()=> context.read<AuthCubit>().register(),
                   );
                 },
               ),
