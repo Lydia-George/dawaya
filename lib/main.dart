@@ -3,6 +3,7 @@ import 'package:dawaya/firebase_options.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
+import 'package:dawaya/presentation/screens/pharmacy_screen/pharmacy_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // AuthGate()
-      home: const AuthGate(),
+      home: const PharmacyScreen(pharmacyId: '1'),
     );
   }
 }

@@ -39,11 +39,13 @@ class CategoryGridItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(_imageInfo(category.image), width: 40, height: 40),
-            SizedBox(height: DSizes.xs),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(_imageInfo(category.image), width: 120, height: 120)),
+            SizedBox(height: DSizes.spaceBtwItems),
             Text(
               category.name,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge!.apply(color: DColors.blueLinear1),
               textAlign: TextAlign.center,
             ),
           ],
@@ -54,7 +56,7 @@ class CategoryGridItem extends StatelessWidget {
 
   String _imageInfo(String image) {
     switch (image) {
-      case 'Pain Relief':
+      case 'pills':
         return DImageStrings.pillsImg;
       case 'Antibiotics':
         return DImageStrings.antibiotic;
@@ -62,7 +64,7 @@ class CategoryGridItem extends StatelessWidget {
         return DImageStrings.vitamins;
       case 'Respiratory':
         return DImageStrings.respiratory;
-      case 'Hair Care':
+      case 'hairCare':
         return DImageStrings.hairCare;
       case 'Skin Care':
         return DImageStrings.skinCare;

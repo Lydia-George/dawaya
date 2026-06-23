@@ -1,3 +1,4 @@
+import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/presentation/cubits/products/products_cubit.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,14 @@ class PharmacyScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => ProductsCubit()..getCategories(pharmacyId),
       child: Scaffold(
-        appBar: AppBar(title: Text('Pharmacy')),
+        appBar: AppBar(
+          title: Text(
+            'Pharmacy ',
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium!.apply(color: DColors.primaryColorBlue),
+          ),
+        ),
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             if (state.isLoading) {
