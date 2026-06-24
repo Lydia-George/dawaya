@@ -16,11 +16,8 @@ class ProductListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final price = product.priceAt(pharmacyId);
-    final available = product.isAvailableAt(pharmacyId);
-
     return GestureDetector(
-      onTap: available
+      onTap: product.isAvailable
           ? () {
               Navigator.push(
                 context,
@@ -35,49 +32,90 @@ class ProductListItem extends StatelessWidget {
           : null,
 
       child: Opacity(
-        opacity: available ? 1.0 : 0.5,
-        child: Container(
-          margin: EdgeInsets.only(bottom: 12),
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            border: Border.all(color: DColors.pestLinear1),
-            borderRadius: BorderRadiusGeometry.circular(12),
-          ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  product.image,
-                  width: 56,
-                  height: 56,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(width: DSizes.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.name,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium!.apply(color: DColors.blueLinear1),
+        opacity: product.isAvailable ? 1.0 : 0.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: DColors.dGery2,
+                      borderRadius: BorderRadiusGeometry.circular(16),
                     ),
-                    SizedBox(height: DSizes.spaceBtwItems),
-                    Text(
-                      available ? '$price EGP' : 'Not available',
-                      style: Theme.of(context).textTheme.titleMedium!.apply(
-                        color: available ? DColors.dGreen : DColors.dRed,
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          product.image,
+                          fit: BoxFit.contain,
+                          errorBuilder: (_, __, ___) =>
+                              Icon(Icons.medication_outlined, size: 40),
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.white,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.add,
+                        color: DColors.primaryColorBlue,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              if(available) Icon(Icons.chevron_right_rounded, color: DColors.dGrey1,),
-            ],
-          ),
+            ),
+
+            SizedBox(height: DSizes.spaceBtwItems),
+
+            /// -- PRODUCT NAME
+            Text(
+              product.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: DColors.blueLinear1,
+                height: 1.2,
+              ),
+            ),
+
+            SizedBox(height: 4),
+
+            /// -- PRICE
+            Text(
+              product.isAvailable ? 'EGP ${product.price} ' : 'Not available',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: product.isAvailable
+                    ? DColors.primaryColorBlue
+                    : Colors.red,
+              ),
+            ),
+          ],
         ),
       ),
     );

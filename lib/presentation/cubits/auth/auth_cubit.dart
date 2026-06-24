@@ -1,4 +1,6 @@
 import 'package:dawaya/data/repositories/auth_repo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +16,8 @@ class AuthCubit extends Cubit<AuthState> {
   void onPasswordChanged(String value) => emit(state.copyWith(password: value));
   void onConfirmPasswordChanged(String value) => emit(state.copyWith(confirmPassword: value));
 
+
+  bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 
   /// -- REGISTER
   Future<void> register() async {

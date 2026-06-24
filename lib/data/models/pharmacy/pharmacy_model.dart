@@ -21,12 +21,12 @@ class PharmacyModel {
   factory PharmacyModel.fromJson(Map<String, dynamic> json) {
     return PharmacyModel(
       id: json['id'].toString(),
-      name: json['name'],
-      logo: json['logo'],
-      address: json['address'],
-      rating: (json['rating']as num).toDouble(),
-      deliveryTime: json['deliveryTime'],
-      isOpen: json['isOpen'],
+      name: json['name'] ?? '',
+      logo: json['logo'] ?? '',
+      address: json['address'] ?? '',
+      rating: (json['rating']as num? )?.toDouble() ?? 0.0,
+      deliveryTime: json['deliveryTime']?.toString() ?? 'N/A',
+      isOpen: json['isOpen'] ?? true,
     );
   }
 }

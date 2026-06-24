@@ -46,6 +46,7 @@ dependencies:
   get: ^4.7.3
   intl: ^0.20.2
   shared_preferences: ^2.5.5
+  dio: ^5.9.2
 
 dev_dependencies:
   flutter_test:
@@ -128,6 +129,8 @@ flutter:
     - lib/assets/images/jpg/products/laRochePosayCleanser.jpeg
     - lib/assets/images/jpg/products/panthenolCream.jpeg
     - lib/assets/images/jpg/products/neutrogenaHydroBoost.jpeg
+    - lib/assets/images/jpg/cart/
+    - lib/assets/images/jpg/cart/empty cart.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

@@ -20,7 +20,8 @@ class ProductsState {
     List<ProductModel>? products,
     String? errorMessage,
   }) {
-    return ProductsState(isLoading: isLoading ?? false,
+    return ProductsState(
+      isLoading: isLoading ?? false,
         categories: categories ?? this.categories,
         products: products ?? this.products,
       errorMessage: errorMessage,

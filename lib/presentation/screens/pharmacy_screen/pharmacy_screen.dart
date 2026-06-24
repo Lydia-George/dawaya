@@ -1,4 +1,5 @@
 import 'package:dawaya/core/constants/app_colors.dart';
+import 'package:dawaya/data/service/api_service/product/product_repo.dart';
 import 'package:dawaya/presentation/cubits/products/products_cubit.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class PharmacyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ProductsCubit()..getCategories(pharmacyId),
+      create: (_) => ProductsCubit(ProductRepo())..getCategories(),
       child: Scaffold(
         appBar: AppBar(
           title: Center(

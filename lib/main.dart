@@ -1,4 +1,5 @@
 import 'package:dawaya/data/repositories/auth_repo.dart';
+import 'package:dawaya/data/service/api_service/pharmacy/pharmacy_repo.dart';
 import 'package:dawaya/firebase_options.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
@@ -22,9 +23,11 @@ void main() async {
             create: (_) => AuthCubit(AuthRepository()),
 
         ),
-      BlocProvider(create: (_) => PharmacyCubit()..getPharmacies()),
+      BlocProvider(
+          create: (_) => PharmacyCubit(PharmacyRepo())..getPharmacies()),
 
-        BlocProvider(create: (_) => CartCubit())
+        BlocProvider(create: (_) => CartCubit()),
+
       ],
       child: const MyApp(),
     ),

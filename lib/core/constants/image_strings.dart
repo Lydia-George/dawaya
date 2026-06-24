@@ -60,4 +60,9 @@ class DImageStrings {
   static const String laRochePosayCleanser = 'lib/assets/images/jpg/products/laRochePosayCleanser.jpeg';
   static const String neutrogenaHydroBoost = 'lib/assets/images/jpg/products/neutrogenaHydroBoost.jpeg';
 
+  /// -- CART IMAGE
+  static const String cart = 'lib/assets/images/jpg/cart/empty cart.jpg';
+
+
+
 }

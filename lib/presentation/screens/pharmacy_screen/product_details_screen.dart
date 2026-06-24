@@ -18,15 +18,16 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final price = product.priceAt(pharmacyId);
     const Color pestBackGround = DColors.primaryColorPest;
 
     return Scaffold(
+      backgroundColor: DColors.dGery2,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
+              flex: 3,
               child: Stack(
                 children: [
 
@@ -34,11 +35,12 @@ class ProductDetailsScreen extends StatelessWidget {
                   Positioned(
                     top: 16,
                     left: 16,
+                    right: 16,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: DColors.whiteTxt,
                           child: IconButton(
                             onPressed: () => Navigator.pop(context),
                             icon: Icon(
@@ -51,11 +53,11 @@ class ProductDetailsScreen extends StatelessWidget {
 
                         /// -- CART BUTTON
                         CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: DColors.whiteTxt,
                           child: Badge(
                             label: Text('3'),
                             child: Icon(
-                              Icons.shopping_basket_outlined,
+                              Icons.add_shopping_cart,
                               color: DColors.primaryColorBlue,
                             ),
                           ),
@@ -67,8 +69,14 @@ class ProductDetailsScreen extends StatelessWidget {
                   /// -- product Image
                   Center(child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 40.0),
-                    child: Image.asset(product.image,
+                    child: Image.network(
+                      product.image,
                       fit: BoxFit.contain,
+                      errorBuilder: (_,__, ___) => Container(
+                        height: 220,
+                        color: DColors.dGery2,
+                        child: Icon(Icons.medication_outlined, size: 64,),
+                      ),
                     ),
                   ),),
 
@@ -93,7 +101,7 @@ class ProductDetailsScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: pestBackGround,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
@@ -111,7 +119,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     )
                         .textTheme
                         .headlineMedium!
-                        .apply(color: DColors.primaryColorBlue),
+                        .apply(color: DColors.whiteTxt),
                   ),
                   SizedBox(height: DSizes.sm),
                   Text(
@@ -122,47 +130,55 @@ class ProductDetailsScreen extends StatelessWidget {
                     )
                         .textTheme
                         .titleMedium!
-                        .apply(color: DColors.dGrey1),
+                        .apply(color: DColors.blueLinear1),
                   ),
-                  Spacer(),
+                  SizedBox(height: DSizes.spaceBtwSections,),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '$price EGP',
+                        '${product.price} EGP',
                         style: Theme
                             .of(
                           context,
                         )
                             .textTheme
                             .headlineMedium!
-                            .apply(color: DColors.dGreen),
+                            .apply(color: DColors.blueLinear2),
                       ),
+                      SizedBox(width: DSizes.spaceBtwItems,),
 
                       // Quantity Counter
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6
-                        ),
-                        decoration: BoxDecoration(
-                          color: DColors.primaryColorBlue,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Row(
-                          children: [
-                            /// -- Minus Button
-                            _buildCounterButton(Icons.remove, () {}),
-                            Padding(padding: EdgeInsets.symmetric(
-                                horizontal: 16),
-                              child: Text('2', style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .apply(color: DColors.primaryColorBlue),),
-                            ),
+                      Flexible(
+                        child: Container(
+                          width: 150,
+                          height: 60,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 6
+                          ),
+                          decoration: BoxDecoration(
+                            color: pestBackGround,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                            /// -- Add button
-                            _buildCounterButton(Icons.add, (){}),
-                          ],
+                            children: [
+                              /// -- Minus Button
+                              _buildCounterButton(Icons.remove, () => context.read<CartCubit>()),
+                              Padding(padding: EdgeInsets.symmetric(
+                                  horizontal: 6),
+                                child: Text('2', style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .apply(color: DColors.whiteTxt),),
+                              ),
+
+                              /// -- Add button
+                              _buildCounterButton(Icons.add, (){}),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -172,7 +188,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
-                      onPressed: ()=> _handleAddToCart(context, price),
+                      onPressed: ()=> _handleAddToCart(context, product.price),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: DColors.primaryColorBlue,
                         foregroundColor: DColors.whiteTxt,
@@ -184,10 +200,10 @@ class ProductDetailsScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.payment, size: 20,),
+                          Icon(Icons.add_shopping_cart, size: 20,),
                           SizedBox(width: DSizes.spaceBtwItems,),
                           Text('Add to cart',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!.apply(color:DColors.whiteTxt),
                           )
                         ],
                       ),
@@ -208,14 +224,14 @@ class ProductDetailsScreen extends StatelessWidget {
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: isSelected ? DColors.primaryColorBlue : DColors.dGrey1,
+        color: isSelected ? DColors.whiteTxt : DColors.primaryColorBlue,
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? DColors.whiteTxt : DColors.primaryColorBlue,
+            color: isSelected ? DColors.primaryColorBlue : DColors.whiteTxt,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -231,7 +247,7 @@ class ProductDetailsScreen extends StatelessWidget {
         shape: CircleBorder(),
         padding: EdgeInsets.zero,
         minimumSize: Size(28, 28),
-        backgroundColor: DColors.darkBlue2,
+        backgroundColor: DColors.whiteTxt,
         foregroundColor: DColors.primaryColorPest,
         elevation: 0,
       ),
@@ -250,7 +266,7 @@ class ProductDetailsScreen extends StatelessWidget {
         productId: product.id,
         name: product.name,
         image: product.image,
-        price: price,
+        price: product.price,
       ),
     );
     if (added) {

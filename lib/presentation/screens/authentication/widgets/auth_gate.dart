@@ -8,11 +8,8 @@ class AuthGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
 
-    if(user != null){
       return const HomeScreen();
-    }
-    return const OnboardingScreen();
+
   }
 }

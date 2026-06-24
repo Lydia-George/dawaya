@@ -5,6 +5,7 @@ class PharmacyState {
   final List<PharmacyModel> pharmacies;
   final String? errorMessage;
 
+
   const PharmacyState({
     this.isLoading = false,
     this.pharmacies = const [],

@@ -10,12 +10,15 @@ import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.d
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/sign_up_form.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
+import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  final bool redirectToCheckout;
+
+  const SignUpScreen({super.key, this.redirectToCheckout = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,30 +71,41 @@ class SignUpScreen extends StatelessWidget {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state.isSuccess) {
-                    context.read<AuthCubit>().resetForm();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Account created ! please sign in'),
-                      ),
-                    );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => LoginScreen()),
-                    );
+                    if (redirectToCheckout) {
+                      context.read<AuthCubit>().resetForm();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Account created Successfully! '),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(16),
+                          ),
+                        ),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => CheckoutScreen()),
+                      );
+                    }else{
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                    }
                   }
                   if (state.errorMessage != null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.errorMessage!)),
+                      SnackBar(
+                        content: Text(state.errorMessage!),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                        ),
+                      ),
                     );
                   }
                 },
                 builder: (context, state) {
                   return AuthButtons(
                     btnText: DText.signUp,
-                    onPressed:
-                    state.isLoading
-                          ? null
-                          : ()=> context.read<AuthCubit>().register(),
+                    onPressed: state.isLoading
+                        ? null
+                        : () => context.read<AuthCubit>().register(),
                   );
                 },
               ),

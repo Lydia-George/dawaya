@@ -10,12 +10,15 @@ import 'package:dawaya/presentation/screens/authentication/widgets/login_form.da
 import 'package:dawaya/presentation/screens/authentication/widgets/orSignup_in_line.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_forgetPass.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
+import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final bool redirectToCheckout;
+
+  const LoginScreen({super.key, this.redirectToCheckout = false});
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +63,6 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: DSizes.spaceBtwSections),
 
-              
-
               /// -- LOGIN FORM
               LoginForm(),
 
@@ -73,10 +74,17 @@ class LoginScreen extends StatelessWidget {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state.isSuccess) {
-                    Navigator.push(
+                    if (redirectToCheckout) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => CheckoutScreen()),
+                      );
+                    }else{
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (h) => HomeScreen()),
                     );
+                    }
                   }
                   if (state.errorMessage != null) {
                     ScaffoldMessenger.of(context).showSnackBar(
