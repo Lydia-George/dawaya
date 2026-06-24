@@ -3,6 +3,10 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
+import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
+import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
+import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -139,7 +143,6 @@ class CartScreen extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-
                             ],
                           ),
                         ],
@@ -155,38 +158,92 @@ class CartScreen extends StatelessWidget {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05) ,
+                      color: Colors.black.withOpacity(0.05),
                       blurRadius: 8,
-                    )
-                  ]
-                ),
-                child: SafeArea(child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Total', style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),),
-
-                      ],
                     ),
-                    SizedBox(height: DSizes.spaceBtwItems,),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          onPressed: (){},
+                  ],
+                ),
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: DSizes.spaceBtwItems),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: Text(DText.dCheckout)),
-                    )
+                          child: Text(DText.dCheckout),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: DColors.pestLinear1,
+                      blurRadius: 8,
+                      offset: Offset(0, -2),
+                    ),
                   ],
-                )),
+                ),
 
-              )
-
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            '${state.totalPrices.toStringAsFixed(2)} EGP',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: DSizes.spaceBtwItems),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => _handleCheckout(context),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          child: Text(DText.dCheckout),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           );
         },
@@ -194,7 +251,51 @@ class CartScreen extends StatelessWidget {
     );
   }
 
+  void _handleCheckout(BuildContext context) {
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
 
+    if (isLoggedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => CheckoutScreen()),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Sign up to continue'),
+          content: Text('You need an account to complete your order.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel', style: TextStyle(color: Colors.red)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SignUpScreen(redirectToCheckout: true),
+                  ),
+                );
+              },
+              child: Text(DText.createAccount),
+            ),
 
-
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LoginScreen()),
+                );
+              },
+              child: Text(DText.login),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 }
