@@ -1,7 +1,7 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/data/models/product/product_model.dart';
-import 'package:dawaya/presentation/screens/pharmacy_screen/product_details_screen.dart';
+import 'package:dawaya/presentation/screens/products/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductListItem extends StatelessWidget {

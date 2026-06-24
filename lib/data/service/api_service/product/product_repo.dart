@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dawaya/data/models/category/category_model.dart';
 import 'package:dawaya/data/models/product/product_model.dart';
 import 'package:dio/dio.dart';
@@ -22,9 +20,10 @@ class ProductRepo {
     final response = await _dio.get(
       '$baseUrl/pharmacies/$pharmacyId/products/',
     );
-    return (response.data as List)
-        .map((json) => ProductModel.fromJson(json))
-        .toList();
+    final data = response.data as Map<String, dynamic>;
+    final productsList = data['products'] as List;
+
+    return productsList.map((json) => ProductModel.fromJson(json)).toList();
   }
 
   /// -- GET PHARMACY PRODUCTS BY CATEGORY
@@ -33,9 +32,12 @@ class ProductRepo {
     required String categoryId,
   }) async {
     final response = await _dio.get(
-      '$baseUrl/pharmacies/$pharmacyId/products/ ',
+      '$baseUrl/pharmacies/$pharmacyId/products/',
       queryParameters: {'category_id': categoryId},
     );
-    return (response.data as List).map((json) => ProductModel.fromJson(json)).toList();
+    final data = response.data as Map<String, dynamic>;
+    final productsList = data['products'] as List;
+
+    return productsList.map((json) => ProductModel.fromJson(json)).toList();
   }
 }

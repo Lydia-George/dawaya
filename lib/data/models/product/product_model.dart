@@ -2,9 +2,11 @@ class ProductModel {
   final String id;
   final String name;
   final String categoryId;
+  final String categoryName;
   final String description;
   final String image;
   final double price;
+  final int stock;
   final bool isAvailable;
 
   const ProductModel({
@@ -15,21 +17,23 @@ class ProductModel {
     required this.image,
     required this.price,
     required this.isAvailable,
+    required this.categoryName,
+    required this.stock,
   });
 
-  //double priceAt(String pharmacyId) => prices[pharmacyId] ?? 0.0;
-
-  // bool isAvailableAt(String pharmacyId) => isAvailable[pharmacyId] ?? false;
+  bool get canOrder => isAvailable && stock > 0;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'].toString(),
-      name: json['name'] ?? '',
-      categoryId: json['category']?.toString() ?? '',
-      description: json['description'] ?? '',
-      image: json['image'] ?? '',
-      price: (json['price'] as num? )?.toDouble() ?? 0.0,
-      isAvailable: (json['isAvailable'] ?? true),
+      id: json['product_id'].toString(),
+      name: json['product_name']?.toString() ?? '',
+      categoryId: json['category_id'].toString(),
+      categoryName: json['category_name']?.toString() ?? '',
+      description: json['product_description']?.toString() ?? '',
+      image: json['product_image']?.toString() ?? '',
+      price: double.tryParse(json['price'].toString()) ?? 0.0,
+      stock: json['stock'] ?? 0,
+      isAvailable: json['is_available'] ?? true,
     );
   }
 }

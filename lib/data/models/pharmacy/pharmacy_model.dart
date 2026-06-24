@@ -4,29 +4,26 @@ class PharmacyModel {
   final String name;
   final String logo;
   final String address;
-  final double rating;
-  final String deliveryTime;
-  final bool isOpen;
+  final String phone;
+  final bool isActive;
 
   PharmacyModel({
     required this.id,
     required this.name,
     required this.logo,
     required this.address,
-    required this.rating,
-    required this.deliveryTime,
-    required this.isOpen,
+    required this.phone,
+    required this.isActive,
   });
 
   factory PharmacyModel.fromJson(Map<String, dynamic> json) {
     return PharmacyModel(
       id: json['id'].toString(),
-      name: json['name'] ?? '',
-      logo: json['logo'] ?? '',
-      address: json['address'] ?? '',
-      rating: (json['rating']as num? )?.toDouble() ?? 0.0,
-      deliveryTime: json['deliveryTime']?.toString() ?? 'N/A',
-      isOpen: json['isOpen'] ?? true,
+      name: json['name']?.toString() ?? '',
+      logo: json['logo']?.toString() ?? '',
+      address: json['address']?.toString() ?? '',
+      phone: json['phone']?.toString() ?? '',
+      isActive: json['isOpen'] ?? true,
     );
   }
 }

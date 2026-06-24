@@ -1,4 +1,3 @@
-import 'package:dawaya/data/dataSources/mockData/pharmacies/mock_pharmacies.dart';
 import 'package:dawaya/data/models/pharmacy/pharmacy_model.dart';
 import 'package:dawaya/data/service/api_service/pharmacy/pharmacy_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

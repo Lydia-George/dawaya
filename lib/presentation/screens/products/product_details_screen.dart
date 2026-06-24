@@ -7,7 +7,7 @@ import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   final ProductModel product;
   final String pharmacyId;
 
@@ -18,12 +18,24 @@ class ProductDetailsScreen extends StatelessWidget {
   });
 
   @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  int _quantity = 1;
+
+  void _increment() => setState(() => _quantity++);
+
+  void _decrement() {
+    if (_quantity > 1) setState(() => _quantity--);
+  }
+
+  @override
   Widget build(BuildContext context) {
     const Color pestBackGround = DColors.primaryColorPest;
-    int _quantity = 1;
 
     return Scaffold(
-      backgroundColor: DColors.dGery2,
+      backgroundColor: DColors.whiteTxt,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +98,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 40.0),
                       child: Image.network(
-                        product.image,
+                        widget.product.image,
                         fit: BoxFit.contain,
                         errorBuilder: (_, __, ___) => Container(
                           height: 220,
@@ -115,11 +127,11 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ),
 
-            /// -- PEST CONTAINER
+            /// -- WHITE CONTAINER
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: pestBackGround,
+                color: DColors.primaryColorBlue,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
@@ -128,32 +140,30 @@ class ProductDetailsScreen extends StatelessWidget {
               padding: EdgeInsets.all(24),
               child: Column(
                 children: [
-                  // product name
                   Text(
-                    product.name,
+                    widget.product.name,
                     style: Theme.of(
                       context,
                     ).textTheme.headlineMedium!.apply(color: DColors.whiteTxt),
                   ),
                   SizedBox(height: DSizes.sm),
                   Text(
-                    product.description,
+                    widget.product.description,
                     style: Theme.of(
                       context,
-                    ).textTheme.titleMedium!.apply(color: DColors.blueLinear1),
+                    ).textTheme.titleMedium!.apply(color: DColors.dGery2),
                   ),
                   SizedBox(height: DSizes.spaceBtwSections),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.price} EGP',
+                        '${(widget.product.price * _quantity).toStringAsFixed(2)} EGP',
                         style: Theme.of(context).textTheme.headlineMedium!
-                            .apply(color: DColors.blueLinear2),
+                            .apply(color: DColors.whiteTxt),
                       ),
                       SizedBox(width: DSizes.spaceBtwItems),
 
-                      // Quantity Counter
                       Flexible(
                         child: Container(
                           width: 150,
@@ -163,29 +173,25 @@ class ProductDetailsScreen extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: pestBackGround,
+                            color: DColors.primaryColorBlue,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                             children: [
                               /// -- Minus Button
-                              _buildCounterButton(
-                                Icons.remove,
-                                () => context.read<CartCubit>(),
-                              ),
+                              _buildCounterButton(Icons.remove, _decrement),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: Text(
-                                  '2',
+                                  '$_quantity',
                                   style: Theme.of(context).textTheme.bodyMedium!
                                       .apply(color: DColors.whiteTxt),
                                 ),
                               ),
 
                               /// -- Add button
-                              _buildCounterButton(Icons.add, () {}),
+                              _buildCounterButton(Icons.add, _increment),
                             ],
                           ),
                         ),
@@ -199,10 +205,10 @@ class ProductDetailsScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
-                      onPressed: () => _handleAddToCart(context, product.price),
+                      onPressed: () => _handleAddToCart(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: DColors.primaryColorBlue,
-                        foregroundColor: DColors.whiteTxt,
+                        backgroundColor: DColors.whiteTxt,
+                        foregroundColor: DColors.primaryColorBlue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusGeometry.circular(20),
                         ),
@@ -216,7 +222,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           Text(
                             'Add to cart',
                             style: Theme.of(context).textTheme.bodyLarge!.apply(
-                              color: DColors.whiteTxt,
+                              color: DColors.primaryColorBlue,
                             ),
                           ),
                         ],
@@ -260,29 +266,29 @@ class ProductDetailsScreen extends StatelessWidget {
         padding: EdgeInsets.zero,
         minimumSize: Size(28, 28),
         backgroundColor: DColors.whiteTxt,
-        foregroundColor: DColors.primaryColorPest,
+        foregroundColor: DColors.primaryColorBlue,
         elevation: 0,
       ),
-
       child: Icon(icon, size: 16),
     );
   }
 
-  void _handleAddToCart(BuildContext context, dynamic price) {
+  void _handleAddToCart(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
     final added = cartCubit.addItem(
-      pharmacyId: pharmacyId,
+      pharmacyId: widget.pharmacyId,
       item: CartItemModel(
-        productId: product.id,
-        name: product.name,
-        image: product.image,
-        price: product.price,
+        productId: widget.product.id,
+        name: widget.product.name,
+        image: widget.product.image,
+        price: widget.product.price,
+        quantity: _quantity,
       ),
     );
     if (added) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('${product.name} added to cart')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${widget.product.name} added to cart')),
+      );
     } else {
       showDialog(
         context: context,
@@ -299,17 +305,18 @@ class ProductDetailsScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 cartCubit.clearAndAddItem(
-                  pharmacyId: pharmacyId,
+                  pharmacyId: widget.pharmacyId,
                   item: CartItemModel(
-                    productId: product.id,
-                    name: product.name,
-                    image: product.image,
-                    price: price,
+                    productId: widget.product.id,
+                    name: widget.product.name,
+                    image: widget.product.image,
+                    price: widget.product.price,
+                    quantity: _quantity,
                   ),
                 );
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('${product.name} added to cart')),
+                  SnackBar(content: Text('${widget.product.name} added to cart')),
                 );
               },
               child: Text('Start New Order'),

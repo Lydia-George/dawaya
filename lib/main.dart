@@ -6,6 +6,7 @@ import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
+import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/pharmacy_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // AuthGate()
-      home: const CartScreen(),
+      home: const AuthGate(),
     );
   }
 }

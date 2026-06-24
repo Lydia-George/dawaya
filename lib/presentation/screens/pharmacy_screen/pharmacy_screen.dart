@@ -39,6 +39,7 @@ class PharmacyScreen extends StatelessWidget {
               ),
               itemCount: state.categories.length,
               itemBuilder: (context, index) {
+
                 return CategoryGridItem(
                   category: state.categories[index],
                   pharmacyId: pharmacyId,

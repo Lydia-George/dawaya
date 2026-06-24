@@ -33,11 +33,17 @@ class PharmacyCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(10),
-              child: Image.asset(
+              child: Image.network(
                 pharmacy.logo,
                 width: 56,
                 height: 56,
                 fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  width: 56,
+                  height: 56,
+                  color: Colors.grey.shade200,
+                  child: const Icon(Icons.local_pharmacy_outlined),
+                ),
               ),
             ),
             SizedBox(width: DSizes.spaceBtwItems),
@@ -50,6 +56,8 @@ class PharmacyCard extends StatelessWidget {
                     style: Theme.of(
                       context,
                     ).textTheme.bodyMedium!.apply(color: DColors.blueLinear1),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: DSizes.xs),
                   Text(
@@ -64,30 +72,21 @@ class PharmacyCard extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.star_outlined,
+                        Icons.phone,
                         size: DSizes.iconXs,
                         color: DColors.dYellow,
                       ),
                       SizedBox(width: DSizes.xs),
                       Text(
-                        '${pharmacy.rating}',
+                        pharmacy.phone,
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
+
                       SizedBox(width: DSizes.md),
-                      Icon(
-                        CupertinoIcons.timer,
-                        size: DSizes.iconXs,
-                        color: DColors.dGrey1,
-                      ),
-                      Text(
-                        pharmacy.deliveryTime,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelSmall!.apply(color: DColors.dGrey1),
-                      ),
+
                     ],
                   ),
-                  if (!pharmacy.isOpen)
+                  if (!pharmacy.isActive)
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                       decoration: BoxDecoration(
