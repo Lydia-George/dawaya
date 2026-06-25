@@ -18,6 +18,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeScreen(),
+    
     CartScreen(),
     ProfileScreen(),
   ];
@@ -48,6 +49,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
               BottomNavigationBarItem(
                 icon: Badge(
+                  backgroundColor: DColors.primaryColorBlue,
                   label: Text('${state.items.length}'),
                   isLabelVisible: state.items.isNotEmpty,
                   child: Icon(Icons.add_shopping_cart),

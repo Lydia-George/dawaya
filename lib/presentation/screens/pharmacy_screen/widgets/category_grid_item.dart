@@ -41,45 +41,63 @@ class CategoryGridItem extends StatelessWidget {
         );
       },
 
-      child: Container(
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadiusGeometry.circular(16),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      child: Column(
+        children: [
+          Container(
 
-            ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  category.icon,
-                  width: 120,
-                  height: 120,
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadiusGeometry.circular(16),
 
-                errorBuilder: (_,__,___) =>
-                   Icon( Icons.medication_outlined, size: 32,),
-                  loadingBuilder: (context, child, progress){
-                    if(progress == null ) return child;
-                    return SizedBox(
-                      width: 44,
-                      height: 44,
-                      child: Center(
-                        child: CircularProgressIndicator(strokeWidth: 2,),
-
-                      ),
-                    );
-                  },
-
-                )),
-            SizedBox(height: DSizes.spaceBtwItems),
-            Text(
-              category.name,
-              style: Theme.of(context).textTheme.titleLarge!.apply(color: DColors.blueLinear1),
-              textAlign: TextAlign.center,
             ),
-          ],
-        ),
+            child:
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    category.icon,
+                    width: 80,
+                    height: 80,
+                  fit: BoxFit.contain,
+
+                  errorBuilder: (_,__,___) =>
+                     Icon( Icons.medication_outlined, size: 32,),
+                    loadingBuilder: (context, child, progress){
+                      if(progress == null ) return child;
+                      return SizedBox(
+                        width: 44,
+                        height: 44,
+                        child: Center(
+                          child: CircularProgressIndicator(strokeWidth: 2,),
+
+                        ),
+                      );
+                    },
+
+                  ),
+                ),
+
+          ),
+          SizedBox(height: DSizes.spaceBtwItems),
+          Text(
+
+            category.name,
+            maxLines: 2,
+
+            overflow: TextOverflow.ellipsis,
+
+            style: Theme.of(context).textTheme.titleSmall
+            !.copyWith(fontWeight: FontWeight.w700,
+              color: DColors.blueLinear1,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: DSizes.spaceBtwItems,),
+
+
+
+        ],
       ),
     );
   }

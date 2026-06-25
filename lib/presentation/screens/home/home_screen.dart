@@ -1,6 +1,7 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
+import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
@@ -40,59 +41,70 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 /// -- cart
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
+                BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    final itemsCount = state.items.length;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Container(
-                          width: 42,
-                          height: 42,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (_) => CartScreen()),
-                              );
-                            },
-                            icon: Icon(CupertinoIcons.cart, size: 22),
-                            color: DColors.primaryColorBlue,
-                          ),
-                        ),
-                        Positioned(
-                          top: -2,
-                          right: -2,
-                          child: Container(
-                            width: 22,
-                            height: 22,
-                            decoration: BoxDecoration(
-                              color: DColors.primaryColorBlue,
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 1),
-                            ),
-                            constraints: BoxConstraints(
-                              maxWidth: 16,
-                              maxHeight: 16,
-                            ),
-                            child: Text(
-                              '1',
-                              style: TextStyle(
-                                color: DColors.whiteTxt,
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              width: 42,
+                              height: 42,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
                               ),
-                              textAlign: TextAlign.center,
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => CartScreen(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(CupertinoIcons.cart, size: 22),
+                                color: DColors.primaryColorBlue,
+                              ),
                             ),
-                          ),
+                            if(itemsCount > 0)
+                            Positioned(
+                              top: -2,
+                              right: -2,
+                              child: Container(
+                                width: 22,
+                                height: 22,
+                                decoration: BoxDecoration(
+                                  color: DColors.primaryColorBlue,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1,
+                                  ),
+                                ),
+                                constraints: BoxConstraints(
+                                  maxWidth: 16,
+                                  maxHeight: 16,
+                                ),
+                                child: Text(
+                                  '$itemsCount',
+                                  style: TextStyle(
+                                    color: DColors.whiteTxt,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
 
                 SizedBox(height: DSizes.spaceBtwSections),

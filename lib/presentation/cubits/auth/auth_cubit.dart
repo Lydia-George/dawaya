@@ -103,6 +103,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   /// -- LOGOUT
   Future<void> logout() async{
+    await _repo.logout();
     emit(AuthState()); // return initial value of state
   }
 

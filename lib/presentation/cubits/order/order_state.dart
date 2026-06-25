@@ -33,13 +33,13 @@ part of 'order_cubit.dart';
    String? paymentMethod,
  }){
    return OrderState(
-    isLoading: isLoading ?? false,
-    isSuccess: isSuccess ?? false,
-    errorMessage: errorMessage,
+    isLoading: isLoading ?? this.isLoading,
+    isSuccess: isSuccess ?? this.isSuccess,
+    errorMessage: errorMessage ?? this.errorMessage,
     fieldErrors: fieldErrors ?? this.fieldErrors,
     name: name ?? this.name,
     phone: phone ?? this.phone,
-    address: this.address,
+    address: this.address ?? this.address,
     paymentMethod: paymentMethod ?? this.paymentMethod,
    );
   }

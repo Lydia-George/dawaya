@@ -71,6 +71,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             return CircleAvatar(
                               backgroundColor: DColors.dGery2,
                               child: Badge(
+                                backgroundColor: DColors.primaryColorBlue,
                                 label: Text('$itemsCount'),
                                 isLabelVisible: itemsCount > 0,
                                 child: IconButton(

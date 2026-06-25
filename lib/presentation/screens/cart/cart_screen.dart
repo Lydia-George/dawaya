@@ -5,6 +5,7 @@ import 'package:dawaya/core/constants/custom_appbar.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/core/utils/helpers/helper_functions.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
+import 'package:dawaya/presentation/cubits/order/order_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
 import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
@@ -20,7 +21,6 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = DHelperFunctions.isDarkMode(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -192,16 +192,7 @@ class CartScreen extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 16),
-                          ),
-                          child: Text(DText.dCheckout),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),
@@ -230,7 +221,8 @@ class CartScreen extends StatelessWidget {
                             'Total',
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w600!,
+                              color: DColors.primaryColorBlue
                             ),
                           ),
                           Text(
@@ -238,6 +230,7 @@ class CartScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
+                              color: DColors.primaryColorBlue
                             ),
                           ),
                         ],
@@ -246,11 +239,18 @@ class CartScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () => _handleCheckout(context),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (_) => BlocProvider(create:
+                                    (context) => OrderCubit(),
+                                  child: CheckoutScreen(),
+                            )));
+                          },
                           style: ElevatedButton.styleFrom(
+                            backgroundColor: DColors.primaryColorBlue,
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: Text('Checkout'),
+                          child: Text('Checkout', style: TextStyle(color: DColors.whiteTxt),),
                         ),
                       ),
                     ],

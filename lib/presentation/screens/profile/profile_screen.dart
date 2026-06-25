@@ -5,6 +5,7 @@ import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:dawaya/presentation/screens/profile/widgets/logout_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,7 +50,9 @@ class ProfileScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'Profile',
           style: TextStyle(color: DColors.primaryColorBlue),
@@ -128,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'No saved addresses yet',
-                                style: TextStyle(color: DColors.blueLinear1),
+                                style: TextStyle(color: DColors.dGrey1),
                               ),
                             );
                           }
@@ -149,11 +152,11 @@ class ProfileScreen extends StatelessWidget {
 
                 /// LOGOUT BUTTON
                 LogoutButton(
-                  onPressed: () {
-                    context.read<AuthCubit>().logout();
+                  onPressed: () async{
+                    await context.read<AuthCubit>().logout();
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => AuthGate()),
+                      MaterialPageRoute(builder: (_) => MainNavigationScreen()),
                       (route) => false,
                     );
                   },

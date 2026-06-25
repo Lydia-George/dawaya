@@ -1,4 +1,3 @@
-import 'dart:math' as DText;
 
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
@@ -15,9 +14,7 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => OrderCubit(),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: DColors.whiteTxt,
         appBar: AppBar(
           backgroundColor: DColors.whiteTxt,
@@ -78,6 +75,7 @@ class CheckoutScreen extends StatelessWidget {
                         children: [
                           /// -- DELIVERY DATA TEXT FIELDS
                           OrderTextField(
+                            keyboardType: TextInputType.name,
                             hintText: 'Enter you fullname',
                             prefixIcon: Icon(Icons.person_outline),
                             labelText: 'Full Name',
@@ -87,6 +85,7 @@ class CheckoutScreen extends StatelessWidget {
                           ),
                           SizedBox(height: DSizes.spaceBtwItems),
                           OrderTextField(
+                            keyboardType: TextInputType.phone,
                             hintText: 'Enter your phone number',
                             prefixIcon: Icon(CupertinoIcons.phone),
                             labelText: 'Phone Number',
@@ -96,11 +95,13 @@ class CheckoutScreen extends StatelessWidget {
                           ),
                           SizedBox(height: DSizes.spaceBtwItems),
                           OrderTextField(
+                            keyboardType: TextInputType.streetAddress,
                             hintText: 'Enter your Address',
                             prefixIcon: Icon(Icons.person_pin_circle_outlined),
                             labelText: 'Delivery Address',
                             maxLines: 2,
                             errorText: state.fieldErrors['address'],
+                            onChanged: (value) => context.read<OrderCubit>().onAddressChanged(value),
                           ),
 
                           SizedBox(height: DSizes.spaceBtwSections),
@@ -205,8 +206,7 @@ class CheckoutScreen extends StatelessWidget {
             );
           },
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildPaymentOptionRow({
@@ -373,7 +373,7 @@ class CheckoutScreen extends StatelessWidget {
     return BlocConsumer<OrderCubit, OrderState>(
       listener: (context, state) {
         if (state.isSuccess) {
-          context.read().clearCart();
+          context.read<CartCubit>().clearCart();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => const OrderSuccessScreen()),
@@ -403,12 +403,23 @@ class CheckoutScreen extends StatelessWidget {
             height: 55,
             child: ElevatedButton(
               onPressed: (!isFormFilled || state.isLoading)
-                  ? null
-                  : () => context.read().validateAndSubmit(
-                      items: cartState.items,
-                      totalPrice: totalAmount,
-                      pharmacyId: cartState.pharmacyId!,
+                 ? null : () {
+                if (cartState.pharmacyId == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Pharmacy ID is missing'),
                     ),
+                  );
+                  return;
+                }
+
+                context.read<OrderCubit>().validateAndSubmit(
+                  items: cartState.items,
+                  totalPrice: totalAmount,
+                  pharmacyId: cartState.pharmacyId!,
+                );
+
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: DColors.primaryColorBlue,
                 disabledBackgroundColor: Colors.grey.shade300,
