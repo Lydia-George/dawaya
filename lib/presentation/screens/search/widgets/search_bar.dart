@@ -33,7 +33,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           Expanded(
             child: TextField(
               style: TextStyle(
-                color: DColors.primaryColorBlue
+                color: DColors.blueLinear2
               ),
               controller: _controller,
               onChanged: (value) {
@@ -48,11 +48,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
                 hintText: 'Search for products',
                 hintStyle: TextStyle(color: DColors.blueLinear1),
-                prefixIcon: Icon(Icons.search, color: DColors.primaryColorPest,),
+                prefixIcon: Icon(Icons.search, color: DColors.blueLinear2,),
                 prefixStyle: TextStyle(color: DColors.primaryColorBlue),
                 suffixIcon: _controller.text.isNotEmpty
                     ? IconButton(
-                        icon: Icon(Icons.close, color: DColors.blueLinear1,),
+                        icon: Icon(Icons.close, color: DColors.blueLinear2,),
                         onPressed: () {
                           _controller.clear();
                           context.read<SearchCubit>().clearSearch();

@@ -8,7 +8,9 @@ import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
 import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
+import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -21,12 +23,24 @@ class CartScreen extends StatelessWidget {
     final dark = DHelperFunctions.isDarkMode(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DAppBar(
-
-        showBackArrow: true,
-        title: Text('Cart', style: Theme.of(context).textTheme.headlineMedium!.apply(
-          color: dark ? DColors.primaryColorPest : DColors.primaryColorBlue
-        ),),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => HomeScreen()),
+            );
+          },
+          icon: Icon(CupertinoIcons.back, color: DColors.primaryColorBlue),
+        ),
+        title: Text(
+          'Cart',
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium!.apply(color: DColors.primaryColorBlue),
+        ),
       ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
@@ -34,7 +48,9 @@ class CartScreen extends StatelessWidget {
             return Center(
               child: Column(
                 children: [
-                  ClipRRect(child: Lottie.asset(DImageStrings.emptyCartAnimation)),
+                  ClipRRect(
+                    child: Lottie.asset(DImageStrings.emptyCartAnimation),
+                  ),
                   SizedBox(height: DSizes.spaceBtwSections),
 
                   Text(
@@ -176,7 +192,6 @@ class CartScreen extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(

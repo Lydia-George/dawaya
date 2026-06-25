@@ -1,6 +1,5 @@
-import 'package:dawaya/presentation/screens/home/home_screen.dart';
-import 'package:dawaya/presentation/screens/onboarding/onboarding_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class AuthGate extends StatelessWidget {
@@ -9,7 +8,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-      return const HomeScreen();
+      return const MainNavigationScreen();
 
   }
 }

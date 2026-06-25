@@ -53,9 +53,9 @@ class PharmacyCard extends StatelessWidget {
                 children: [
                   Text(
                     pharmacy.name,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium!.apply(color: DColors.primaryColorBlue),
+                    style: Theme.of(context).textTheme.titleSmall!.apply(
+                      color: DColors.primaryColorBlue,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -74,16 +74,17 @@ class PharmacyCard extends StatelessWidget {
                       Icon(
                         Icons.phone,
                         size: DSizes.iconXs,
-                        color: DColors.dYellow,
+                        color: DColors.primaryColorBlue,
                       ),
                       SizedBox(width: DSizes.xs),
                       Text(
                         pharmacy.phone,
-                        style: Theme.of(context).textTheme.labelSmall,
+                        style: Theme.of(context).textTheme.labelMedium!.apply(
+                          color: DColors.blueLinear1,
+                        ),
                       ),
 
                       SizedBox(width: DSizes.md),
-
                     ],
                   ),
                   if (!pharmacy.isActive)

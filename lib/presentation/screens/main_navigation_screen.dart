@@ -30,6 +30,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           return BottomNavigationBar(
+
+            backgroundColor: DColors.whiteTxt,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() => _currentIndex = index);

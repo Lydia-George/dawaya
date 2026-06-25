@@ -3,6 +3,7 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
+import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
 import 'package:dawaya/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:dawaya/presentation/screens/home/widgets/pharmacy_card.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_bar.dart';
@@ -52,10 +53,15 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child: Icon(
-                            CupertinoIcons.cart,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => CartScreen()),
+                              );
+                            },
+                            icon: Icon(CupertinoIcons.cart, size: 22),
                             color: DColors.primaryColorBlue,
-                            size: 22,
                           ),
                         ),
                         Positioned(
@@ -88,7 +94,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
 
                 SizedBox(height: DSizes.spaceBtwSections),
 
