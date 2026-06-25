@@ -2,7 +2,6 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/data/models/pharmacy/pharmacy_model.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/pharmacy_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PharmacyCard extends StatelessWidget {
@@ -38,7 +37,7 @@ class PharmacyCard extends StatelessWidget {
                 width: 56,
                 height: 56,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
+                errorBuilder: (_, _, _) => Container(
                   width: 56,
                   height: 56,
                   color: Colors.grey.shade200,

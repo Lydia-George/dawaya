@@ -54,7 +54,7 @@ class SearchResultCard extends StatelessWidget {
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Icon(
+                errorBuilder: (_, _, _) => Icon(
                   Icons.medication_outlined,
                   color: DColors.primaryColorBlue,
                   size: 36,

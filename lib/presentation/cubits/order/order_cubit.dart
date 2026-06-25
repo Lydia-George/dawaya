@@ -22,8 +22,9 @@ class OrderCubit extends Cubit<OrderState> {
     final errors = <String, String>{};
     if (state.name.trim().isEmpty) errors['name'] = 'Name is required !';
     if (state.phone.trim().isEmpty) errors['phone'] = 'Phone is required !';
-    if (state.address.trim().isEmpty)
+    if (state.address.trim().isEmpty) {
       errors['address'] = 'Address is required !';
+    }
     return errors;
   }
 

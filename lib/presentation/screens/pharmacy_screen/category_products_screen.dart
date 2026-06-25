@@ -1,6 +1,8 @@
+import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/data/service/api_service/product/product_repo.dart';
 import 'package:dawaya/presentation/cubits/products/products_cubit.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/widgets/product_list_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +25,20 @@ class CategoryProductsScreen extends StatelessWidget {
           ProductsCubit(ProductRepo())
             ..getProducts(pharmacyId: pharmacyId, categoryId: categoryId),
       child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(title: Text(categoryName)),
+        backgroundColor: DColors.dGery2,
+        appBar: AppBar(
+          backgroundColor: DColors.dGery2,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(CupertinoIcons.back, color: DColors.primaryColorBlue,),
+          ),
+          title: Text(
+            categoryName,
+            style: Theme.of(context).textTheme.headlineSmall!.apply(color: DColors.primaryColorBlue),
+          ),
+        ),
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             if (state.isLoading) {

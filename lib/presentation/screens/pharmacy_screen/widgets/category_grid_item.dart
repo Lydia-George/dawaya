@@ -61,7 +61,7 @@ class CategoryGridItem extends StatelessWidget {
                     height: 80,
                   fit: BoxFit.contain,
 
-                  errorBuilder: (_,__,___) =>
+                  errorBuilder: (_,_,_) =>
                      Icon( Icons.medication_outlined, size: 32,),
                     loadingBuilder: (context, child, progress){
                       if(progress == null ) return child;

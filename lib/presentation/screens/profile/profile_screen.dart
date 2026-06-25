@@ -4,7 +4,6 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
-import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
 import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:dawaya/presentation/screens/profile/widgets/logout_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,8 +136,7 @@ class ProfileScreen extends StatelessWidget {
                           }
 
                           final lastOrder =
-                              orderSnapShot.data!.docs.first.data()
-                                  as Map<String, dynamic>;
+                              orderSnapShot.data!.docs.first.data();
                           return ListTile(
                             leading: Icon(CupertinoIcons.location),
                             title: Text(lastOrder['address'] ?? ''),

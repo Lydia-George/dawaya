@@ -5,6 +5,7 @@ import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/products/products_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:dawaya/presentation/screens/pharmacy_screen/widgets/category_grid_item.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_bar.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_result_card.dart';
@@ -49,30 +50,58 @@ class PharmacyScreen extends StatelessWidget {
 
                       final itemsCount = state.items.length;
                       return Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Container(
+                            width: 42,
+                            height: 42,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const MainNavigationScreen(),
+                                  ),
+                                      (route) => false,
+                                );
+                              },
+                              icon: Icon(CupertinoIcons.back, size: 22),
+                              color: DColors.primaryColorBlue,
+                            ),
+                          ),
                           Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              Container(
-                                width: 42,
-                                height: 42,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => CartScreen(),
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(CupertinoIcons.cart, size: 22),
-                                  color: DColors.primaryColorBlue,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 42,
+                                    height: 42,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => CartScreen(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(CupertinoIcons.cart, size: 22),
+                                      color: DColors.primaryColorBlue,
+                                    ),
+                                  ),
+
+
+                                ],
                               ),
                               if(itemsCount > 0)
                                 Positioned(

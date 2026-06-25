@@ -101,7 +101,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       child: Image.network(
                         widget.product.image,
                         fit: BoxFit.contain,
-                        errorBuilder: (_, __, ___) => Container(
+                        errorBuilder: (_, _, _) => Container(
                           height: 220,
                           color: DColors.dGery2,
                           child: Icon(Icons.medication_outlined, size: 64),

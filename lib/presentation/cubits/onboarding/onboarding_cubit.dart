@@ -17,7 +17,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void nextPage() {
     if (!isLastPage) {
       pageController.nextPage(
-          duration: Duration(microseconds: 400), curve: Curves.easeInOut);
+          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
     }
   }
 

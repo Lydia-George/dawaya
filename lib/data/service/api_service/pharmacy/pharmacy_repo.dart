@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dawaya/data/models/pharmacy/pharmacy_model.dart';
 import 'package:dio/dio.dart';

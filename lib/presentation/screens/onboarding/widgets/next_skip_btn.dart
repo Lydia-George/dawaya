@@ -1,7 +1,6 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/onboarding/onboarding_cubit.dart';
-import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +37,7 @@ class NextSkipBtn extends StatelessWidget {
 
         ElevatedButton(
           onPressed: () async {
+            if(obj.isLastPage){
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool('has_seen_onboarding', true);
 
@@ -45,6 +45,9 @@ class NextSkipBtn extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (l) => MainNavigationScreen()),
             );
+            }else{
+              obj.nextPage();
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: DColors.whiteTxt,

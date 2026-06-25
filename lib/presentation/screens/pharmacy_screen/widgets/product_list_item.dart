@@ -42,7 +42,7 @@ class ProductListItem extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: DColors.dGery2,
+                      color: DColors.whiteTxt,
                       borderRadius: BorderRadiusGeometry.circular(16),
                     ),
                     child: Padding(
@@ -52,7 +52,7 @@ class ProductListItem extends StatelessWidget {
                         child: Image.network(
                           product.image,
                           fit: BoxFit.contain,
-                          errorBuilder: (_, __, ___) =>
+                          errorBuilder: (_, _, _) =>
                               Icon(Icons.medication_outlined, size: 40),
                         ),
                       ),
@@ -66,7 +66,7 @@ class ProductListItem extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: DColors.whiteTxt,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(

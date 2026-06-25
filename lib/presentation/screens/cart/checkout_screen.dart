@@ -1,4 +1,3 @@
-
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
@@ -14,7 +13,22 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<OrderCubit, OrderState>(
+      listener: (context, state) {
+        if (state.isSuccess) {
+          context.read<CartCubit>().clearCart();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const OrderSuccessScreen()),
+          );
+        }
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errorMessage!)),
+          );
+        }
+      },
+      child: Scaffold(
         backgroundColor: DColors.whiteTxt,
         appBar: AppBar(
           backgroundColor: DColors.whiteTxt,
@@ -101,7 +115,8 @@ class CheckoutScreen extends StatelessWidget {
                             labelText: 'Delivery Address',
                             maxLines: 2,
                             errorText: state.fieldErrors['address'],
-                            onChanged: (value) => context.read<OrderCubit>().onAddressChanged(value),
+                            onChanged: (value) =>
+                                context.read<OrderCubit>().onAddressChanged(value),
                           ),
 
                           SizedBox(height: DSizes.spaceBtwSections),
@@ -112,7 +127,7 @@ class CheckoutScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium!
                                 .apply(color: DColors.primaryColorBlue),
                           ),
-                          SizedBox(height: DSizes.spaceBtwItems,),
+                          SizedBox(height: DSizes.spaceBtwItems),
 
                           Container(
                             decoration: BoxDecoration(
@@ -120,7 +135,6 @@ class CheckoutScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(color: DColors.dGrey1),
                             ),
-
                             child: Column(
                               children: [
                                 _buildPaymentOptionRow(
@@ -130,9 +144,7 @@ class CheckoutScreen extends StatelessWidget {
                                   value: 'Apple Pay',
                                   groupValue: state.paymentMethod,
                                 ),
-
                                 Divider(height: 1, color: DColors.dGery2),
-
                                 _buildPaymentOptionRow(
                                   context: context,
                                   title: 'Cash',
@@ -140,14 +152,12 @@ class CheckoutScreen extends StatelessWidget {
                                   value: 'Cash on Delivery',
                                   groupValue: state.paymentMethod,
                                 ),
-
-                                /// -- Build Security Badge
                                 _buildSecurityBadge(),
                                 SizedBox(height: DSizes.spaceBtwSections),
                               ],
                             ),
                           ),
-                          SizedBox(height: DSizes.spaceBtwSections,),
+                          SizedBox(height: DSizes.spaceBtwSections),
 
                           /// -- VOUCHER
                           Text(
@@ -158,7 +168,6 @@ class CheckoutScreen extends StatelessWidget {
                               color: DColors.primaryColorBlue,
                             ),
                           ),
-
                           SizedBox(height: DSizes.spaceBtwItems),
                           _buildVoucherField(),
                           SizedBox(height: DSizes.spaceBtwSections),
@@ -171,7 +180,6 @@ class CheckoutScreen extends StatelessWidget {
                               color: DColors.primaryColorBlue,
                             ),
                           ),
-
                           SizedBox(height: DSizes.spaceBtwItems),
                           _buildSummaryRow(
                             'Subtotal',
@@ -191,7 +199,7 @@ class CheckoutScreen extends StatelessWidget {
                           ),
 
                           /// -- PLACE ORDER BUTTON
-                          buildBottomCheckoutButton(
+                          _buildBottomCheckoutButton(
                             context,
                             state,
                             cartState,
@@ -206,7 +214,8 @@ class CheckoutScreen extends StatelessWidget {
             );
           },
         ),
-      );
+      ),
+    );
   }
 
   Widget _buildPaymentOptionRow({
@@ -310,7 +319,6 @@ class CheckoutScreen extends StatelessWidget {
               ),
             ),
           ),
-
           TextButton(
             onPressed: () {},
             child: Text(
@@ -364,84 +372,64 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget buildBottomCheckoutButton(
+  /// -- لاحظي: مفيش BlocConsumer هنا خالص، الزرار بيستخدم نفس state
+  /// اللي جاية من الـ BlocBuilder الخارجي في body. مفيش shadowing تاني.
+  Widget _buildBottomCheckoutButton(
     BuildContext context,
     OrderState state,
     dynamic cartState,
     double totalAmount,
   ) {
-    return BlocConsumer<OrderCubit, OrderState>(
-      listener: (context, state) {
-        if (state.isSuccess) {
-          context.read<CartCubit>().clearCart();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const OrderSuccessScreen()),
-          );
-        }
-        if (state.errorMessage != null) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
-        }
-      },
-      builder: (context, state) {
-        final isFormFilled =
-            state.name.trim().isNotEmpty &&
-            state.phone.trim().isNotEmpty &&
-            state.address.trim().isNotEmpty;
-        String buttonText = 'Place Order';
-        if (state.paymentMethod == 'Apple Pay') {
-          buttonText = 'Pay with  Pay';
-        } else if (state.paymentMethod == 'Cash on Delivery') {
-          buttonText = 'Confirm Cash Order';
-        }
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-            width: double.infinity,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: (!isFormFilled || state.isLoading)
-                 ? null : () {
-                if (cartState.pharmacyId == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Pharmacy ID is missing'),
-                    ),
+    final isFormFilled = state.name.trim().isNotEmpty &&
+        state.phone.trim().isNotEmpty &&
+        state.address.trim().isNotEmpty;
+
+    String buttonText = 'Place Order';
+    if (state.paymentMethod == 'Apple Pay') {
+      buttonText = 'Pay with Apple Pay';
+    } else if (state.paymentMethod == 'Cash on Delivery') {
+      buttonText = 'Confirm Cash Order';
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 55,
+        child: ElevatedButton(
+          onPressed: (!isFormFilled || state.isLoading)
+              ? null
+              : () {
+                  if (cartState.pharmacyId == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Pharmacy ID is missing')),
+                    );
+                    return;
+                  }
+                  context.read<OrderCubit>().validateAndSubmit(
+                    items: cartState.items,
+                    totalPrice: totalAmount,
+                    pharmacyId: cartState.pharmacyId!,
                   );
-                  return;
-                }
-
-                context.read<OrderCubit>().validateAndSubmit(
-                  items: cartState.items,
-                  totalPrice: totalAmount,
-                  pharmacyId: cartState.pharmacyId!,
-                );
-
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: DColors.primaryColorBlue,
-                disabledBackgroundColor: Colors.grey.shade300,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                elevation: 0,
-              ),
-              child: state.isLoading
-                  ? const CircularProgressIndicator(color: Colors.blue)
-                  : Text(
-                      buttonText,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-            ),
+                },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: DColors.primaryColorBlue,
+            disabledBackgroundColor: Colors.grey.shade300,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            elevation: 0,
           ),
-        );
-      },
+          child: state.isLoading
+              ? const CircularProgressIndicator(color: Colors.blue)
+              : Text(
+                  buttonText,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+        ),
+      ),
     );
   }
 }

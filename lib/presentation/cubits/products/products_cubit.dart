@@ -1,5 +1,3 @@
-import 'package:dawaya/data/dataSources/mockData/category/mock_categories.dart';
-import 'package:dawaya/data/dataSources/mockData/products/mock_products.dart';
 import 'package:dawaya/data/models/category/category_model.dart';
 import 'package:dawaya/data/models/product/product_model.dart';
 import 'package:dawaya/data/service/api_service/product/product_repo.dart';

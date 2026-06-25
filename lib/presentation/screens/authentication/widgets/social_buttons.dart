@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SocialButtons extends StatelessWidget {
 
 
-   SocialButtons({
+   const SocialButtons({
     super.key,
 
   });

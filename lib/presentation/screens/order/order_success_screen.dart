@@ -1,6 +1,5 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
-import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
 import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
 

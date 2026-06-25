@@ -1,9 +1,7 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
-import 'package:dawaya/core/constants/custom_appbar.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
-import 'package:dawaya/core/utils/helpers/helper_functions.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/order/order_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
@@ -89,7 +87,7 @@ class CartScreen extends StatelessWidget {
                               width: 56,
                               height: 56,
                               fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) =>
+                              errorBuilder: (_, _, _) =>
                                   Icon(Icons.medication_outlined, size: 40),
                             ),
                           ),
@@ -221,7 +219,7 @@ class CartScreen extends StatelessWidget {
                             'Total',
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w600!,
+                              fontWeight: FontWeight.w600,
                               color: DColors.primaryColorBlue
                             ),
                           ),

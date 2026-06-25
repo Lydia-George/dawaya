@@ -3,7 +3,6 @@ import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
-import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/align_titles.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/already_have_account.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_button.dart';

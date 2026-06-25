@@ -58,6 +58,7 @@ class ForgotPassword extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(DText.resetPasswordTitle)),
                   );
+                 
                   Navigator.pop(context);
                 }
                 if (state.errorMessage!=null) {
