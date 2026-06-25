@@ -31,6 +31,8 @@ class HomeScreen extends StatelessWidget {
                 BannerCarousel(),
                 SizedBox(height: DSizes.spaceBtwItems),
 
+
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
