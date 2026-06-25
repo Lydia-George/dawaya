@@ -55,7 +55,7 @@ class PharmacyCard extends StatelessWidget {
                     pharmacy.name,
                     style: Theme.of(
                       context,
-                    ).textTheme.bodyMedium!.apply(color: DColors.blueLinear1),
+                    ).textTheme.bodyMedium!.apply(color: DColors.primaryColorBlue),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

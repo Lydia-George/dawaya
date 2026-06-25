@@ -17,7 +17,7 @@ class SearchRepo {
     final responses = await Future.wait(
         pharmacies.map((pharmacy) async{
       try{
-        final response = await _dio.get('$baseUrl/pharmacies/${pharmacy.id}/products/}');
+        final response = await _dio.get('$baseUrl/pharmacies/${pharmacy.id}/products/');
         final data = response.data as Map<String, dynamic>;
         final productsList = data['products'] as List;
 
@@ -38,6 +38,7 @@ class SearchRepo {
 
 
     }catch(e){
+        print(e);
         return <SearchResultModel>[];
       }
 

@@ -22,7 +22,7 @@ class SearchCubit extends Cubit<SearchState> {
         query: query,
         pharmacies: pharmacies,
       );
-      emit(state.copyWith(results: results));
+      emit(state.copyWith(isLoading: false, results: results, errorMessage: null));
     } catch (e) {
       emit(state.copyWith(errorMessage: 'Search failed. Try again'));
     }
