@@ -53,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CircleAvatar(
-                          backgroundColor: DColors.whiteTxt,
+                          backgroundColor: DColors.dGery2,
                           child: IconButton(
                             onPressed: () => Navigator.pop(context),
                             icon: Icon(
@@ -69,7 +69,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           builder: (context, state) {
                             final itemsCount = state.items.length;
                             return CircleAvatar(
-                              backgroundColor: DColors.whiteTxt,
+                              backgroundColor: DColors.dGery2,
                               child: Badge(
                                 label: Text('$itemsCount'),
                                 isLabelVisible: itemsCount > 0,

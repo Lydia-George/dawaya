@@ -64,5 +64,8 @@ class DImageStrings {
   static const String cart = 'lib/assets/images/jpg/cart/empty cart.jpg';
 
 
+  /// -- ANIMATIONS
+  static const String emptyCartAnimation = 'lib/assets/lottie/Empty Cart.json';
+
 
 }

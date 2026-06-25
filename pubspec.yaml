@@ -131,6 +131,8 @@ flutter:
     - lib/assets/images/jpg/products/neutrogenaHydroBoost.jpeg
     - lib/assets/images/jpg/cart/
     - lib/assets/images/jpg/cart/empty cart.jpg
+    - lib/assets/lottie/
+    - lib/assets/lottie/Empty Cart.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

@@ -1,7 +1,9 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
+import 'package:dawaya/core/constants/custom_appbar.dart';
 import 'package:dawaya/core/constants/image_strings.dart';
+import 'package:dawaya/core/utils/helpers/helper_functions.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
@@ -9,22 +11,30 @@ import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = DHelperFunctions.isDarkMode(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('My Cart')),
+      appBar: DAppBar(
+
+        showBackArrow: true,
+        title: Text('Cart', style: Theme.of(context).textTheme.headlineMedium!.apply(
+          color: dark ? DColors.primaryColorPest : DColors.primaryColorBlue
+        ),),
+      ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state.items.isEmpty) {
-            Center(
+            return Center(
               child: Column(
                 children: [
-                  ClipRRect(child: Image.asset(DImageStrings.cart)),
+                  ClipRRect(child: Lottie.asset(DImageStrings.emptyCartAnimation)),
                   SizedBox(height: DSizes.spaceBtwSections),
 
                   Text(
@@ -166,19 +176,7 @@ class CartScreen extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: DSizes.spaceBtwItems),
+
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -237,7 +235,7 @@ class CartScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: Text(DText.dCheckout),
+                          child: Text('Checkout'),
                         ),
                       ),
                     ],

@@ -5,7 +5,7 @@ class DText{
   static const String done = "Done";
   static const String submit = "Submit";
   static const String dContinue = "Continue";
-  static const String dCheckout= "dCheckout";
+  static const String dCheckout= "Checkout";
   static const String reset = "Reset Now";
   static const String signupToContinue = 'Please Sign up to continue';
   static const String youNeedAccount = 'You need an account to complete your order.';
