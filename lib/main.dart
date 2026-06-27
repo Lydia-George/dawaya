@@ -1,3 +1,4 @@
+import 'package:dawaya/core/app_themes/app_themes.dart';
 import 'package:dawaya/data/repositories/auth_repo.dart';
 import 'package:dawaya/data/service/api_service/pharmacy/pharmacy_repo.dart';
 import 'package:dawaya/data/service/api_service/search/search_repo.dart';
@@ -7,6 +8,7 @@ import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/home/home_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
+import 'package:dawaya/presentation/cubits/theme/theme_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/widgets/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +24,18 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (_) => AuthCubit(AuthRepository()),
+          create: (_) => AuthCubit(AuthRepository()),
 
         ),
-      BlocProvider(
-          create: (_) => PharmacyCubit(PharmacyRepo())..getPharmacies()),
+        BlocProvider(
+            create: (_) =>
+            PharmacyCubit(PharmacyRepo())
+              ..getPharmacies()),
 
         BlocProvider(create: (_) => CartCubit()),
         BlocProvider(create: (_) => HomeCubit()),
         BlocProvider(create: (_) => SearchCubit(SearchRepo())),
+        BlocProvider(create: (_) => ThemeCubit()),
 
 
       ],
@@ -44,10 +49,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // AuthGate()
-      home: const AuthGate(),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: state.flutterThemeMode,
+          // AuthGate()
+          home: const AuthGate(),
+        );
+      },
     );
   }
 }

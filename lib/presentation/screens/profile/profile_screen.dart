@@ -6,6 +6,7 @@ import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:dawaya/presentation/screens/profile/widgets/logout_button.dart';
+import 'package:dawaya/presentation/screens/profile/widgets/theme/theme_selector.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -148,6 +149,10 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
+
+                /// -- THEME SELECTOR
+                ThemeSelector(),
+                SizedBox(height: DSizes.spaceBtwSections,),
                 /// LOGOUT BUTTON
                 LogoutButton(
                   onPressed: () async{
