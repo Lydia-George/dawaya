@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeState()) {}
+  ThemeCubit() : super(ThemeState()) {
+    _loadSavedTheme();
+  }
 
   Future<void> _loadSavedTheme() async {
     final prefs = await SharedPreferences.getInstance();

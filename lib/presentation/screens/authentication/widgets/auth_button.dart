@@ -27,7 +27,7 @@ class AuthButtons extends StatelessWidget {
           child: Text(
             btnText,
             style: TextStyle(
-            color: DColors.whiteTxt,
+            color: DColors.dWhite,
               fontWeight: FontWeight.bold
 
           ),),

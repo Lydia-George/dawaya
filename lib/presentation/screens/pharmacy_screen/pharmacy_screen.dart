@@ -23,7 +23,7 @@ class PharmacyScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => ProductsCubit(ProductRepo())..getCategories(),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
         body: Column(
           children: [
@@ -44,7 +44,7 @@ class PharmacyScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  /// -- cart
+
                   BlocBuilder<CartCubit, CartState>(
                     builder: (context, state) {
 
@@ -52,6 +52,7 @@ class PharmacyScreen extends StatelessWidget {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          /// back button
                           Container(
                             width: 42,
                             height: 42,
@@ -79,6 +80,8 @@ class PharmacyScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+
+                                  /// cart button
                                   Container(
                                     width: 42,
                                     height: 42,
@@ -103,6 +106,8 @@ class PharmacyScreen extends StatelessWidget {
 
                                 ],
                               ),
+
+                              /// items count
                               if(itemsCount > 0)
                                 Positioned(
                                   top: -2,
@@ -125,7 +130,7 @@ class PharmacyScreen extends StatelessWidget {
                                     child: Text(
                                       '$itemsCount',
                                       style: TextStyle(
-                                        color: DColors.whiteTxt,
+                                        color: DColors.dWhite,
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                       ),

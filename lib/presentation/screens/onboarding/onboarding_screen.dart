@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
         builder: (context, state) {
           final obj = context.read<OnboardingCubit>();
           return Scaffold(
-            backgroundColor: DColors.whiteTxt,
+            backgroundColor: DColors.dWhite,
             body: Stack(
               children: [
 
@@ -44,7 +44,7 @@ class OnboardingScreen extends StatelessWidget {
                         Text(
                           onboardList[state.currentIndex].title,
                           style: Theme.of(context).textTheme.headlineMedium!
-                              .apply(color: DColors.whiteTxt),
+                              .apply(color: DColors.dWhite),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 15),
@@ -53,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                         Text(
                           onboardList[state.currentIndex].subTitle,
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            color: DColors.whiteTxt,
+                            color: DColors.dWhite,
                           ),
                         ),
 
@@ -72,7 +72,7 @@ class OnboardingScreen extends StatelessWidget {
                               height: 8,
                               decoration: BoxDecoration(
                                 color: state.currentIndex == index
-                                    ? DColors.whiteTxt
+                                    ? DColors.dWhite
                                     : DColors.dGrey1,
                                 borderRadius: BorderRadiusGeometry.circular(4),
                               ),

@@ -29,7 +29,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 DText.resetPassword,
                 style: Theme.of(
                   context,
-                ).textTheme.headlineLarge!.apply(color: DColors.blackTxt),
+                ).textTheme.headlineLarge!.apply(color: DColors.dBlack),
               ),
               Spacer(),
 

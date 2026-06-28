@@ -42,7 +42,7 @@ class ProductListItem extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: DColors.whiteTxt,
+                      color: DColors.dWhite,
                       borderRadius: BorderRadiusGeometry.circular(16),
                     ),
                     child: Padding(
@@ -66,7 +66,7 @@ class ProductListItem extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: DColors.whiteTxt,
+                        color: DColors.dWhite,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(

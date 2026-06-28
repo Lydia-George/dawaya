@@ -30,7 +30,7 @@ class ForgotPassword extends StatelessWidget {
               DText.forgotPasswordTitle,
               style: Theme.of(
                 context,
-              ).textTheme.headlineLarge!.apply(color: DColors.blackTxt),
+              ).textTheme.headlineLarge!.apply(color: DColors.dBlack),
             ),
             Spacer(),
 

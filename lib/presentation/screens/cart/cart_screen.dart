@@ -20,9 +20,9 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -248,7 +248,7 @@ class CartScreen extends StatelessWidget {
                             backgroundColor: DColors.primaryColorBlue,
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: Text('Checkout', style: TextStyle(color: DColors.whiteTxt),),
+                          child: Text('Checkout', style: TextStyle(color: DColors.dWhite),),
                         ),
                       ),
                     ],

@@ -7,6 +7,7 @@ import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
 import 'package:dawaya/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:dawaya/presentation/screens/home/widgets/pharmacy_card.dart';
+import 'package:dawaya/presentation/screens/home/widgets/theme_toggle_button.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_bar.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_result_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           /// -- Header
@@ -45,8 +46,9 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, state) {
                     final itemsCount = state.items.length;
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        ThemeToggleButton(),
                         Stack(
                           clipBehavior: Clip.none,
                           children: [
@@ -92,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Text(
                                   '$itemsCount',
                                   style: TextStyle(
-                                    color: DColors.whiteTxt,
+                                    color: DColors.dWhite,
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -102,6 +104,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+
+
+
                       ],
                     );
                   },

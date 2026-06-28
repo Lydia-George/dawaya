@@ -35,7 +35,7 @@ class OrderTextField extends StatelessWidget {
       maxLines: maxLines,
       decoration: InputDecoration(
         filled: true,
-        fillColor: DColors.whiteTxt,
+        fillColor: DColors.dWhite,
         hintText: hintText ,
         hintStyle: TextStyle(color: DColors.blueLinear2),
         labelText: labelText,

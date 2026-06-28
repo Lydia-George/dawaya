@@ -29,14 +29,14 @@ class CheckoutScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: DColors.whiteTxt,
+        backgroundColor: DColors.dWhite,
         appBar: AppBar(
-          backgroundColor: DColors.whiteTxt,
+          backgroundColor: DColors.dWhite,
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
-              backgroundColor: DColors.whiteTxt,
+              backgroundColor: DColors.dWhite,
               child: IconButton(
                 onPressed: () => Navigator.pop(context),
                 icon: Icon(

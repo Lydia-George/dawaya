@@ -32,8 +32,8 @@ class DColors{
 
 
   /// TEXT COLORS
-  static const Color blackTxt = Color(0xff1E252D);
-  static const Color whiteTxt = Color(0xffFFFFFF);
+  static const Color dBlack = Color(0xff1E252D);
+  static const Color dWhite = Color(0xffFFFFFF);
 
   /// STATE COLOR
   static const Color infoColor = Color(0xff2F80ED);

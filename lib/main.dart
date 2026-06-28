@@ -50,12 +50,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, state) {
+      builder: (context, themeState) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,
-          themeMode: state.flutterThemeMode,
+          themeMode: themeState.flutterThemeMode,
           // AuthGate()
           home: const AuthGate(),
         );

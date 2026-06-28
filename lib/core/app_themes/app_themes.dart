@@ -2,43 +2,73 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: DColors.primaryColorBlue,
-    scaffoldBackgroundColor: DColors.whiteTxt,
-    appBarTheme: AppBarTheme(
-      backgroundColor: DColors.whiteTxt,
-      foregroundColor: DColors.primaryColorBlue,
-      elevation: 0,
-    ),
-    colorScheme: ColorScheme.light(
-      primary: DColors.primaryColorBlue,
-      secondary: DColors.primaryColorPest,
-    ),
+  static ThemeData lightTheme = _buildTheme(Brightness.light);
+  static ThemeData darkTheme = _buildTheme(Brightness.dark);
 
-    textTheme: TextTheme(
+  static ThemeData _buildTheme(Brightness brightness){
+    final isDark = brightness == Brightness.dark;
 
-    ),
+    final backgroundColor = isDark ? DColors.dBlack : DColors.dWhite;
+    final foregroundColor = DColors.primaryColorBlue;
+    final cardColor = isDark ? const Color(0xFF1E1E1E) : DColors.dWhite;
 
-  );
+    return ThemeData(
+      useMaterial3: true,
+      brightness:brightness,
+      primaryColor: DColors.primaryColorBlue,
+      scaffoldBackgroundColor: backgroundColor,
+      cardColor: cardColor,
+      appBarTheme: AppBarTheme(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        elevation: 0,
+      ),
+      colorScheme: isDark ? ColorScheme.dark(
+        primary: DColors.primaryColorBlue,
+        secondary: DColors.primaryColorPest
+      ) : ColorScheme.light(
+        primary: DColors.primaryColorBlue,
+        secondary: DColors.primaryColorPest
+      ) ,
+
+      cardTheme: CardThemeData(
+        color: cardColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(15),
+        ),
+      ),
+
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        filled: true,
+        fillColor:  isDark ? DColors.dBlack : DColors.dWhite,
+      ),
+
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          return states.contains(WidgetState.selected) ? DColors.primaryColorBlue : DColors.dGery2;
+        }),
+        trackColor: WidgetStateProperty.all(DColors.primaryColorBlue),
 
 
-  static ThemeData darkTheme =ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: DColors.primaryColorBlue,
-    scaffoldBackgroundColor: Color(0xFF121212),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF1E1E1E),
-      foregroundColor: Colors.white,
-      elevation: 0,
-    ),
-    colorScheme: ColorScheme.dark(
-      primary: DColors.primaryColorBlue,
-      secondary: DColors.primaryColorPest,
-    ),
-    cardColor: const Color(0xFF1E1E1E),
-    textTheme: const TextTheme(),
-  );
+      ),
+
+      focusColor: isDark ? DColors.dBlack : DColors.dWhite,
+      hoverColor: isDark ? DColors.dBlack : DColors.dWhite,
+
+
+
+
+      textTheme: TextTheme(
+
+      ),
+
+    );
+  }
+
+
 
 
 }

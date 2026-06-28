@@ -1,5 +1,6 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
+import 'package:dawaya/presentation/cubits/theme/theme_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
 import 'package:dawaya/presentation/screens/profile/profile_screen.dart';
@@ -18,21 +19,26 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeScreen(),
-    
+
     CartScreen(),
     ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final themeState = context.watch<ThemeCubit>().state;
+    final isDarkMode =
+        themeState.themeMode == AppThemeMode.dark ||
+        (themeState.themeMode == AppThemeMode.system &&
+            MediaQuery.platformBrightnessOf(context) == Brightness.dark);
+
     return Scaffold(
       body: IndexedStack(index: _currentIndex, children: _screens),
 
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           return BottomNavigationBar(
-
-            backgroundColor: DColors.whiteTxt,
+            backgroundColor: DColors.dWhite,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() => _currentIndex = index);
@@ -58,9 +64,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
 
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person),
+                icon: Icon(CupertinoIcons.person),
                 activeIcon: Icon(Icons.person),
-                label: 'Profile'
+                label: 'Profile',
               ),
             ],
           );

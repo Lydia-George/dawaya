@@ -35,7 +35,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     const Color pestBackGround = DColors.primaryColorPest;
 
     return Scaffold(
-      backgroundColor: DColors.whiteTxt,
+      backgroundColor: DColors.dWhite,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +145,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     widget.product.name,
                     style: Theme.of(
                       context,
-                    ).textTheme.headlineMedium!.apply(color: DColors.whiteTxt),
+                    ).textTheme.headlineMedium!.apply(color: DColors.dWhite),
                   ),
                   SizedBox(height: DSizes.sm),
                   Text(
@@ -161,7 +161,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Text(
                         '${(widget.product.price * _quantity).toStringAsFixed(2)} EGP',
                         style: Theme.of(context).textTheme.headlineMedium!
-                            .apply(color: DColors.whiteTxt),
+                            .apply(color: DColors.dWhite),
                       ),
                       SizedBox(width: DSizes.spaceBtwItems),
 
@@ -187,7 +187,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 child: Text(
                                   '$_quantity',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(color: DColors.whiteTxt),
+                                      .apply(color: DColors.dWhite),
                                 ),
                               ),
 
@@ -208,7 +208,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     child: ElevatedButton(
                       onPressed: () => _handleAddToCart(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: DColors.whiteTxt,
+                        backgroundColor: DColors.dWhite,
                         foregroundColor: DColors.primaryColorBlue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusGeometry.circular(20),
@@ -244,14 +244,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: isSelected ? DColors.whiteTxt : DColors.primaryColorBlue,
+        color: isSelected ? DColors.dWhite : DColors.primaryColorBlue,
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? DColors.primaryColorBlue : DColors.whiteTxt,
+            color: isSelected ? DColors.primaryColorBlue : DColors.dWhite,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -266,7 +266,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         shape: CircleBorder(),
         padding: EdgeInsets.zero,
         minimumSize: Size(28, 28),
-        backgroundColor: DColors.whiteTxt,
+        backgroundColor: DColors.dWhite,
         foregroundColor: DColors.primaryColorBlue,
         elevation: 0,
       ),

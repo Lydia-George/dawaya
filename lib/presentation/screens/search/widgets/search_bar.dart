@@ -25,7 +25,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: DColors.whiteTxt,
+
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -62,7 +62,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     : null,
 
                 filled: true,
-                fillColor: DColors.whiteTxt,
+                fillColor: DColors.dWhite,
                 border: OutlineInputBorder(
 
                   borderRadius: BorderRadius.circular(30),
@@ -81,7 +81,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 enabledBorder: OutlineInputBorder(
 
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: DColors.whiteTxt),
+                  borderSide: BorderSide(color: DColors.dWhite),
                 ),
 
               ),

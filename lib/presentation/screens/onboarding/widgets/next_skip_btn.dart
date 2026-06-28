@@ -28,7 +28,7 @@ class NextSkipBtn extends StatelessWidget {
           child: Text(
             DText.skip,
             style: TextStyle(
-              color: DColors.whiteTxt,
+              color: DColors.dWhite,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -50,7 +50,7 @@ class NextSkipBtn extends StatelessWidget {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: DColors.whiteTxt,
+            backgroundColor: DColors.dWhite,
             foregroundColor: DColors.primaryColorPest,
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
             shape: RoundedRectangleBorder(
