@@ -17,9 +17,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme
+          .of(context)
+          .scaffoldBackgroundColor,
       body: Column(
         children: [
+
           /// -- Header
           PrimaryHeaderContainer(),
 
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   if (state.isLoading) {
                     return ListView.builder(
                         itemCount: 4,
-                        itemBuilder: (_,__)=> PharmacyCardShimmer());
+                        itemBuilder: (_, __) => PharmacyCardShimmer());
                   }
                   if (state.errorMessage != null) {
                     return Center(child: Text(state.errorMessage!));
@@ -56,40 +59,46 @@ class HomeScreen extends StatelessWidget {
                 return BlocBuilder<PharmacyCubit, PharmacyState>(
                   builder: (context, state) {
                     if (state.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          itemCount: 5,
+                          itemBuilder: (_, __) => const  PharmacyCardShimmer()
+                    );
                     }
                     if (state.errorMessage != null) {
-                      return Center(child: Text(state.errorMessage!));
+                    return Center(child: Text(state.errorMessage!));
                     }
 
                     return ListView(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      children: [
-                        /// -- BANNERS
-                        BannerCarousel(),
-                        SizedBox(height: DSizes.spaceBtwItems),
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    children: [
+                    /// -- BANNERS
+                    BannerCarousel(),
+                    SizedBox(height: DSizes.spaceBtwItems),
 
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            DText.pharmaciesNearYou,
-                            style: Theme.of(context).textTheme.titleMedium!
-                                .apply(color: DColors.primaryColorBlue),
-                          ),
-                        ),
-                        SizedBox(height: DSizes.spaceBtwItems),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: state.pharmacies.length,
-                          itemBuilder: (context, index) {
-                            return PharmacyCard(
-                              pharmacy: state.pharmacies[index],
-                            );
-                          },
-                        ),
-                      ],
+                    Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                    DText.pharmaciesNearYou,
+                    style: Theme.of(context).textTheme.titleMedium!
+                        .apply(color: DColors.primaryColorBlue),
+                    ),
+                    ),
+                    SizedBox(height: DSizes.spaceBtwItems),
+                    ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: state.pharmacies.length,
+                    itemBuilder: (context, index) {
+                    return PharmacyCard(
+                    pharmacy: state.pharmacies[index],
+                    );
+                    },
+                    )
+                    ,
+                    ]
+                    ,
                     );
                   },
                 );
