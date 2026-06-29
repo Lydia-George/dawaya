@@ -16,7 +16,7 @@ class RememberMeAndForgetPass extends StatelessWidget {
           children: [
             Checkbox(
               value: state.rememberMe,
-              activeColor: DColors.primaryColorPest,
+              activeColor: DColors.secondaryPest,
               onChanged: (value) {
                 context.read<AuthCubit>().toggleRememberMe(value);
               },

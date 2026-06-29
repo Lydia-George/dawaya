@@ -71,7 +71,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 focusedBorder: OutlineInputBorder(
 
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: DColors.primaryColorPest),
+                  borderSide: BorderSide(color: DColors.secondaryPest),
                 ),
                 disabledBorder: OutlineInputBorder(
 

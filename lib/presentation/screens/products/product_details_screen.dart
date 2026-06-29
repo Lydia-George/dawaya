@@ -32,7 +32,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color pestBackGround = DColors.primaryColorPest;
+    const Color pestBackGround = DColors.secondaryPest;
 
     return Scaffold(
       backgroundColor: DColors.dWhite,

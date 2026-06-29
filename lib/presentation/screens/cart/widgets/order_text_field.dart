@@ -52,7 +52,7 @@ class OrderTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: DColors.primaryColorPest),
+          borderSide: BorderSide(color: DColors.secondaryPest),
         ),
         errorText: errorText,
         errorStyle: TextStyle(color: DColors.dRed),

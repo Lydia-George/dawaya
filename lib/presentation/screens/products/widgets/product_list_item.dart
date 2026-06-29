@@ -16,6 +16,7 @@ class ProductListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: product.isAvailable
           ? () {
@@ -111,7 +112,9 @@ class ProductListItem extends StatelessWidget {
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: product.isAvailable
-                    ? DColors.primaryColorBlue
+                    ? isDark
+                          ? DColors.secondaryPest
+                          : DColors.secondaryBlue
                     : Colors.red,
               ),
             ),

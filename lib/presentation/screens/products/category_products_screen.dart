@@ -21,24 +21,28 @@ class CategoryProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BlocProvider(
       create: (_) =>
           ProductsCubit(ProductRepo())
             ..getProducts(pharmacyId: pharmacyId, categoryId: categoryId),
       child: Scaffold(
-        backgroundColor: DColors.dGery2,
+        backgroundColor: isDark ? DColors.dBlack : DColors.dGery2,
         appBar: AppBar(
-          backgroundColor: DColors.dGery2,
+          backgroundColor: isDark ? DColors.dBlack : DColors.dGery2,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(CupertinoIcons.back, color: DColors.primaryColorBlue,),
+            icon: Icon(
+              CupertinoIcons.back,
+              color: isDark
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.primary,
+            ),
           ),
-          title: Text(
-            categoryName,
-            style: Theme.of(context).textTheme.headlineSmall!.apply(color: DColors.primaryColorBlue),
-          ),
+          title: Text(categoryName),
         ),
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {

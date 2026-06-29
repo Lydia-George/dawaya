@@ -127,7 +127,7 @@ class CartScreen extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size(28, 28),
                                   backgroundColor: DColors.primaryColorBlue,
-                                  foregroundColor: DColors.primaryColorPest,
+                                  foregroundColor: DColors.secondaryPest,
                                   elevation: 0,
                                 ),
 
@@ -157,7 +157,7 @@ class CartScreen extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size(28, 28),
                                   backgroundColor: DColors.primaryColorBlue,
-                                  foregroundColor: DColors.primaryColorPest,
+                                  foregroundColor: DColors.secondaryPest,
                                   elevation: 0,
                                 ),
 

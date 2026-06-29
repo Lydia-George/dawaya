@@ -51,7 +51,7 @@ class NextSkipBtn extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: DColors.dWhite,
-            foregroundColor: DColors.primaryColorPest,
+            foregroundColor: DColors.secondaryPest,
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusGeometry.circular(50),

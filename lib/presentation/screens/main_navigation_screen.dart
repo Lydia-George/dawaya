@@ -44,7 +44,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               setState(() => _currentIndex = index);
             },
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: DColors.primaryColorPest,
+            selectedItemColor: DColors.secondaryPest,
             unselectedItemColor: DColors.primaryColorBlue,
             items: [
               BottomNavigationBarItem(

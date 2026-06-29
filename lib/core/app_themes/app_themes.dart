@@ -9,7 +9,7 @@ class AppThemes {
     final isDark = brightness == Brightness.dark;
 
     final backgroundColor = isDark ? DColors.dBlack : DColors.dWhite;
-    final foregroundColor = DColors.primaryColorBlue;
+    final foregroundColor =isDark? DColors.dWhite : DColors.primaryColorBlue;
     final cardColor = isDark ? const Color(0xFF1E1E1E) : DColors.dWhite;
 
     return ThemeData(
@@ -19,18 +19,24 @@ class AppThemes {
       scaffoldBackgroundColor: backgroundColor,
       cardColor: cardColor,
       appBarTheme: AppBarTheme(
+
+        titleTextStyle: TextStyle(
+          color:isDark ? DColors.secondaryPest : DColors.primaryColorBlue,
+
+        ),
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
         elevation: 0,
+
       ),
       colorScheme: isDark
           ? ColorScheme.dark(
               primary: DColors.primaryColorBlue,
-              secondary: DColors.primaryColorPest,
+              secondary: DColors.secondaryPest,
             )
           : ColorScheme.light(
               primary: DColors.primaryColorBlue,
-              secondary: DColors.primaryColorPest,
+              secondary: DColors.secondaryPest,
             ),
 
       cardTheme: CardThemeData(
@@ -60,7 +66,8 @@ class AppThemes {
       focusColor: isDark ? DColors.dBlack : DColors.dWhite,
       hoverColor: isDark ? DColors.dBlack : DColors.dWhite,
 
-      textTheme: TextTheme(),
+      textTheme: TextTheme(
+          ),
     );
   }
 }
