@@ -12,7 +12,20 @@
           "package_name": "com.example.dawaya"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "141762125036-etep17r953j87dnvk0t48fckb8aqvibu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dawaya",
+            "certificate_hash": "45dad0052a40bb807d7dcbfcb2d5ae8a62f71362"
+          }
+        },
+        {
+          "client_id": "141762125036-3lr95hpvvrs6sh5c8ahktg48l507o271.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBNeblesPtjm_y3fSmE21rtNjFUmbEBHQA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141762125036-3lr95hpvvrs6sh5c8ahktg48l507o271.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "141762125036-ertfufojf5bms7nlogivb3rt0tsjo2gl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dawaya"
+              }
+            }
+          ]
         }
       }
     }

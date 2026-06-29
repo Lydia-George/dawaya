@@ -23,7 +23,28 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.isSuccess) {
+          if (redirectToCheckout) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => CheckoutScreen()),
+            );
+          }else{
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (h) => HomeScreen()),
+            );
+          }
+        }
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errorMessage!)),
+          );
+        }
+      },
+  child: Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Padding(
@@ -70,27 +91,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: DSizes.spaceBtwItems),
 
               /// -- SIGN IN BUTTON
-              BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  if (state.isSuccess) {
-                    if (redirectToCheckout) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => CheckoutScreen()),
-                      );
-                    }else{
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (h) => HomeScreen()),
-                    );
-                    }
-                  }
-                  if (state.errorMessage != null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.errorMessage!)),
-                    );
-                  }
-                },
+              BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return AuthButtons(
                     btnText: DText.signIn,
@@ -116,6 +117,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ),
+);
   }
 }

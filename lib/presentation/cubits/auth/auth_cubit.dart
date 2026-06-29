@@ -11,37 +11,36 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._repo) : super(AuthState());
 
   void onFullNameChanged(String value) => emit(state.copyWith(fullName: value));
-  void onEmailChanged(String value) => emit(state.copyWith(email: value));
-  void onPasswordChanged(String value) => emit(state.copyWith(password: value));
-  void onConfirmPasswordChanged(String value) => emit(state.copyWith(confirmPassword: value));
 
+  void onEmailChanged(String value) => emit(state.copyWith(email: value));
+
+  void onPasswordChanged(String value) => emit(state.copyWith(password: value));
+
+  void onConfirmPasswordChanged(String value) =>
+      emit(state.copyWith(confirmPassword: value));
 
   bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 
   /// -- REGISTER
   Future<void> register() async {
-    if(state.fullName.trim().isEmpty){
+    if (state.fullName.trim().isEmpty) {
       emit(state.copyWith(errorMessage: 'Full name is required'));
       return;
     }
-    if(state.password != state.confirmPassword){
-      emit(state.copyWith(errorMessage: 'Password doesn\'t match!!' ));
+    if (state.password != state.confirmPassword) {
+      emit(state.copyWith(errorMessage: 'Password doesn\'t match!!'));
       return;
     }
     emit(state.copyWith(isLoading: true));
-    try{
-      await _repo.register(state.email, state.password,state.fullName);
+    try {
+      await _repo.register(state.email, state.password, state.fullName);
 
       await _repo.logout();
       emit(state.copyWith(isSuccess: true));
-    }catch(e){
+    } catch (e) {
       emit(state.copyWith(errorMessage: e.toString()));
     }
-
-
   }
-
-
 
   /// -- LOG IN
   Future<void> login() async {
@@ -51,13 +50,12 @@ class AuthCubit extends Cubit<AuthState> {
       await _repo.login(state.email, state.password);
 
       final prefs = await SharedPreferences.getInstance();
-      if(state.rememberMe){
+      if (state.rememberMe) {
         await prefs.setString('saved_email', state.email);
         await prefs.setBool('remember_me', true);
-      }
-      else{
+      } else {
         await prefs.remove('saved_email');
-        await prefs.setBool('remember_me' , false);
+        await prefs.setBool('remember_me', false);
       }
 
       emit(state.copyWith(isSuccess: true));
@@ -66,11 +64,9 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-
-
   /// -- RESET PASSWORD
   Future<void> resetPassword() async {
-    if(state.email.trim().isEmpty){
+    if (state.email.trim().isEmpty) {
       emit(state.copyWith(errorMessage: 'Please enter your email'));
       return;
     }
@@ -90,25 +86,34 @@ class AuthCubit extends Cubit<AuthState> {
 
   /// -- LOAD THE SAVED VALUE
   // read the current saved value when screen open
-  Future<void> loadSavedEmail() async{
+  Future<void> loadSavedEmail() async {
     final prefs = await SharedPreferences.getInstance();
     final remembered = prefs.getBool('remember_me') ?? false;
-    if(remembered){
+    if (remembered) {
       final savedEmail = prefs.getString('saved_email');
       emit(state.copyWith(rememberMe: true, savedEmail: savedEmail));
     }
   }
 
+  /// -- SIGN IN WITH GOOGLE
+  Future<void> signInWithGoogle() async {
+    emit(state.copyWith(isLoading: true));
+
+    try {
+      await _repo.signInWithGoogle();
+      emit(state.copyWith(isSuccess: true));
+    } catch (e) {
+      emit(state.copyWith(errorMessage: e.toString()));
+    }
+  }
 
   /// -- LOGOUT
-  Future<void> logout() async{
+  Future<void> logout() async {
     await _repo.logout();
     emit(AuthState()); // return initial value of state
   }
 
-  void resetForm(){
+  void resetForm() {
     emit(AuthState());
   }
-
-
 }
