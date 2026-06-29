@@ -5,7 +5,7 @@ class AppThemes {
   static ThemeData lightTheme = _buildTheme(Brightness.light);
   static ThemeData darkTheme = _buildTheme(Brightness.dark);
 
-  static ThemeData _buildTheme(Brightness brightness){
+  static ThemeData _buildTheme(Brightness brightness) {
     final isDark = brightness == Brightness.dark;
 
     final backgroundColor = isDark ? DColors.dBlack : DColors.dWhite;
@@ -14,7 +14,7 @@ class AppThemes {
 
     return ThemeData(
       useMaterial3: true,
-      brightness:brightness,
+      brightness: brightness,
       primaryColor: DColors.primaryColorBlue,
       scaffoldBackgroundColor: backgroundColor,
       cardColor: cardColor,
@@ -23,13 +23,15 @@ class AppThemes {
         foregroundColor: foregroundColor,
         elevation: 0,
       ),
-      colorScheme: isDark ? ColorScheme.dark(
-        primary: DColors.primaryColorBlue,
-        secondary: DColors.primaryColorPest
-      ) : ColorScheme.light(
-        primary: DColors.primaryColorBlue,
-        secondary: DColors.primaryColorPest
-      ) ,
+      colorScheme: isDark
+          ? ColorScheme.dark(
+              primary: DColors.primaryColorBlue,
+              secondary: DColors.primaryColorPest,
+            )
+          : ColorScheme.light(
+              primary: DColors.primaryColorBlue,
+              secondary: DColors.primaryColorPest,
+            ),
 
       cardTheme: CardThemeData(
         color: cardColor,
@@ -39,36 +41,26 @@ class AppThemes {
       ),
 
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         filled: true,
-        fillColor:  isDark ? DColors.dBlack : DColors.dWhite,
+        fillColor: isDark ? DColors.dBlack : DColors.dWhite,
       ),
 
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
-          return states.contains(WidgetState.selected) ? DColors.primaryColorBlue : DColors.dGery2;
+          return states.contains(WidgetState.selected)
+              ? DColors.primaryColorBlue
+              : DColors.dGery2;
         }),
-        trackColor: WidgetStateProperty.all(DColors.primaryColorBlue),
+        trackColor: WidgetStateProperty.all(DColors.dWhite),
 
-
+        trackOutlineColor: WidgetStateProperty.all(DColors.dWhite),
       ),
 
       focusColor: isDark ? DColors.dBlack : DColors.dWhite,
       hoverColor: isDark ? DColors.dBlack : DColors.dWhite,
 
-
-
-
-      textTheme: TextTheme(
-
-      ),
-
+      textTheme: TextTheme(),
     );
   }
-
-
-
-
 }
