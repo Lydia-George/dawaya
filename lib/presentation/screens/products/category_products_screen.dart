@@ -1,7 +1,8 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/data/service/api_service/product/product_repo.dart';
 import 'package:dawaya/presentation/cubits/products/products_cubit.dart';
-import 'package:dawaya/presentation/screens/pharmacy_screen/widgets/product_list_item.dart';
+import 'package:dawaya/presentation/screens/products/shimmer/product_grid_shimmer.dart';
+import 'package:dawaya/presentation/screens/products/widgets/product_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,7 @@ class CategoryProductsScreen extends StatelessWidget {
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return Center(child: CircularProgressIndicator());
+              return ProductGridShimmer();
             }
             if (state.errorMessage != null) {
               return Center(child: Text(state.errorMessage!));

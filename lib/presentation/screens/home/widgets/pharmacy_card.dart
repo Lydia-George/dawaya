@@ -1,8 +1,9 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/data/models/pharmacy/pharmacy_model.dart';
-import 'package:dawaya/presentation/screens/pharmacy_screen/pharmacy_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../pharmacy/pharmacy_screen.dart';
 
 class PharmacyCard extends StatelessWidget {
   final PharmacyModel pharmacy;

@@ -6,11 +6,12 @@ class DColors{
 
   /// PRIMARY COLORS
   static const Color primaryColorBlue = Color(0xff226CEB);
-
   static const Color primaryColorPest = Color(0xff48C5E9);
 
   /// SECONDARY COLORS
-
+  static const Color secondaryBlue = Color(0xff4274D9);
+  static const Color secondaryPest = Color(0xff95CCDD);
+  static const Color sky = Color(0xffD0E7E6);
   static const Color buttonColor = Color(0xff236DEC);
   static const Color darkBlue = Color(0xff0957DE);
   static const Color darkBlue2 = Color(0xff2C67CC);

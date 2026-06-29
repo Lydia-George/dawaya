@@ -1,18 +1,15 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
-import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
-import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
+import 'package:dawaya/presentation/screens/home/shimmer/pharmacy_card_shimmer.dart';
 import 'package:dawaya/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:dawaya/presentation/screens/home/widgets/pharmacy_card.dart';
-import 'package:dawaya/presentation/screens/home/widgets/theme_toggle_button.dart';
-import 'package:dawaya/presentation/screens/search/widgets/search_bar.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_result_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/constants/widgets/custom_shapes/containers/primary_header_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,108 +21,17 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           /// -- Header
-          Container(
-            decoration: BoxDecoration(
-              color: DColors.primaryColorBlue,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-              ),
-            ),
+          PrimaryHeaderContainer(),
 
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 12,
-              bottom: 16,
-              left: 16,
-              right: 16,
-            ),
-            child: Column(
-              children: [
-                /// -- cart
-                BlocBuilder<CartCubit, CartState>(
-                  builder: (context, state) {
-                    final itemsCount = state.items.length;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ThemeToggleButton(),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Container(
-                              width: 42,
-                              height: 42,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => CartScreen(),
-                                    ),
-                                  );
-                                },
-                                icon: Icon(CupertinoIcons.cart, size: 22),
-                                color: DColors.primaryColorBlue,
-                              ),
-                            ),
-                            if(itemsCount > 0)
-                            Positioned(
-                              top: -2,
-                              right: -2,
-                              child: Container(
-                                width: 22,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                  color: DColors.primaryColorBlue,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 1,
-                                  ),
-                                ),
-                                constraints: BoxConstraints(
-                                  maxWidth: 16,
-                                  maxHeight: 16,
-                                ),
-                                child: Text(
-                                  '$itemsCount',
-                                  style: TextStyle(
-                                    color: DColors.dWhite,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-
-
-                      ],
-                    );
-                  },
-                ),
-
-                SizedBox(height: DSizes.spaceBtwSections),
-
-                SearchBarWidget(),
-                SizedBox(height: DSizes.spaceBtwSections),
-              ],
-            ),
-          ),
-
+          /// -- BODY
           Expanded(
             child: BlocBuilder<SearchCubit, SearchState>(
               builder: (context, state) {
                 if (state.hasSearched) {
                   if (state.isLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return ListView.builder(
+                        itemCount: 4,
+                        itemBuilder: (_,__)=> PharmacyCardShimmer());
                   }
                   if (state.errorMessage != null) {
                     return Center(child: Text(state.errorMessage!));
@@ -195,3 +101,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
