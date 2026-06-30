@@ -8,6 +8,7 @@ import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/authentication/signup_screen.dart';
 import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -28,7 +30,7 @@ class CartScreen extends StatelessWidget {
             Navigator.pop(context);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => HomeScreen()),
+              MaterialPageRoute(builder: (_) => MainNavigationScreen()),
             );
           },
           icon: Icon(CupertinoIcons.back, color: DColors.primaryColorBlue),
@@ -176,30 +178,12 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
 
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-                child: SafeArea(
-                  child: Column(
-                    children: [
 
-                    ],
-                  ),
-                ),
-              ),
 
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: isDark? DColors.dBlack : DColors.dWhite,
                   boxShadow: [
                     BoxShadow(
                       color: DColors.pestLinear1,
@@ -217,19 +201,12 @@ class CartScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Total',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: DColors.primaryColorBlue
-                            ),
+                            style: Theme.of(context).textTheme.headlineSmall,
+
                           ),
                           Text(
                             '${state.totalPrices.toStringAsFixed(2)} EGP',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: DColors.primaryColorBlue
-                            ),
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],
                       ),

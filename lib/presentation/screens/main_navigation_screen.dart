@@ -20,8 +20,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeScreen(),
-    OrdersScreen(),
     CartScreen(),
+    OrdersScreen(),
     ProfileScreen(),
   ];
 
@@ -34,20 +34,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             MediaQuery.platformBrightnessOf(context) == Brightness.dark);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: IndexedStack(index: _currentIndex, children: _screens),
 
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           return BottomNavigationBar(
-            backgroundColor: DColors.dWhite,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() => _currentIndex = index);
             },
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: DColors.secondaryPest,
-            unselectedItemColor: DColors.primaryColorBlue,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),

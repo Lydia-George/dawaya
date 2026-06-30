@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/data/models/order/order_model.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -19,7 +21,19 @@ class OrdersScreen extends StatelessWidget {
     if (user == null) {
       return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(title: Text('My Orders')),
+        appBar: AppBar(
+          title: Text('My Orders'),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => MainNavigationScreen()),
+              );
+            },
+            icon: Icon(CupertinoIcons.back),
+          ),
+        ),
         body: Center(
           child: Column(
             children: [
