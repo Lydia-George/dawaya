@@ -410,6 +410,7 @@ class CheckoutScreen extends StatelessWidget {
                     items: cartState.items,
                     totalPrice: totalAmount,
                     pharmacyId: cartState.pharmacyId!,
+                    pharmacyName: cartState.pharmacyName!,
                   );
                 },
           style: ElevatedButton.styleFrom(

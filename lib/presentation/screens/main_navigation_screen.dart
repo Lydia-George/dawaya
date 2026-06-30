@@ -3,6 +3,7 @@ import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/theme/theme_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
+import 'package:dawaya/presentation/screens/order/orders_screen.dart';
 import 'package:dawaya/presentation/screens/profile/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeScreen(),
-
+    OrdersScreen(),
     CartScreen(),
     ProfileScreen(),
   ];
@@ -33,6 +34,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             MediaQuery.platformBrightnessOf(context) == Brightness.dark);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: IndexedStack(index: _currentIndex, children: _screens),
 
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
@@ -64,9 +66,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
 
               BottomNavigationBarItem(
+                icon: Icon(Icons.receipt_long_outlined),
+              activeIcon: Icon(Icons.receipt_long),
+                label: 'Orders'
+              ),
+
+              BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.person),
                 activeIcon: Icon(Icons.person),
-                label: 'Profile',
+                label: 'Account',
               ),
             ],
           );

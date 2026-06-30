@@ -66,6 +66,7 @@ class DImageStrings {
 
   /// -- ANIMATIONS
   static const String emptyCartAnimation = 'lib/assets/lottie/Empty Cart.json';
-
+  static const String loginAnimation = 'lib/assets/lottie/Login & Mobile Login.json';
+  static const String noRecentOrders = 'lib/assets/lottie/NO RECENT ORDERS.json';
 
 }

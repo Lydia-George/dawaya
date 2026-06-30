@@ -32,6 +32,7 @@ class OrderCubit extends Cubit<OrderState> {
     required List<CartItemModel> items,
     required double totalPrice,
     required String pharmacyId,
+    required String pharmacyName,
   }) async {
     final errors = _validateFields();
     if (errors.isNotEmpty) {
@@ -62,6 +63,8 @@ class OrderCubit extends Cubit<OrderState> {
         paymentMethod: state.paymentMethod,
         status: 'pending',
         pharmacyId: pharmacyId,
+        pharmacyName: pharmacyName,
+        createdAt: DateTime.now(),
       );
 
       await FirebaseFirestore.instance

@@ -136,6 +136,8 @@ flutter:
     - lib/assets/images/jpg/cart/empty cart.jpg
     - lib/assets/lottie/
     - lib/assets/lottie/Empty Cart.json
+    - lib/assets/lottie/Login & Mobile Login.json
+    - lib/assets/lottie/NO RECENT ORDERS.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

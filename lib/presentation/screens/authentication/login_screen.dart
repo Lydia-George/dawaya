@@ -12,6 +12,7 @@ import 'package:dawaya/presentation/screens/authentication/widgets/rememberMe_fo
 import 'package:dawaya/presentation/screens/authentication/widgets/social_buttons.dart';
 import 'package:dawaya/presentation/screens/cart/checkout_screen.dart';
 import 'package:dawaya/presentation/screens/home/home_screen.dart';
+import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +35,7 @@ class LoginScreen extends StatelessWidget {
           }else{
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (h) => HomeScreen()),
+              MaterialPageRoute(builder: (h) => MainNavigationScreen()),
             );
           }
         }
