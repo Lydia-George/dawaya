@@ -13,8 +13,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PharmacyScreen extends StatelessWidget {
   final String pharmacyId;
+  final String pharmacyName;
 
-  const PharmacyScreen({super.key, required this.pharmacyId});
+  const PharmacyScreen({
+    super.key,
+    required this.pharmacyId,
+    required this.pharmacyName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +31,12 @@ class PharmacyScreen extends StatelessWidget {
         body: Column(
           children: [
             /// -- HEADER
-            PharmacyScreenHeader(),
+            PharmacyScreenHeader(pharmacyName: pharmacyName,),
 
             /// -- BODY
             Expanded(
               child: BlocBuilder<SearchCubit, SearchState>(
                 builder: (context, searchState) {
-
                   /// Search Loading
                   if (searchState.hasSearched && searchState.isLoading) {
                     return CategoryGridShimmer();
@@ -41,20 +45,15 @@ class PharmacyScreen extends StatelessWidget {
                   /// Search Error
                   if (searchState.hasSearched &&
                       searchState.errorMessage != null) {
-                    return Center(
-                      child: Text(searchState.errorMessage!),
-                    );
+                    return Center(child: Text(searchState.errorMessage!));
                   }
 
                   /// No Results
-                  if (searchState.hasSearched &&
-                      searchState.results.isEmpty) {
+                  if (searchState.hasSearched && searchState.results.isEmpty) {
                     return Center(
                       child: Text(
                         'Oops !! No Products found',
-                        style: TextStyle(
-                          color: DColors.primaryColorBlue,
-                        ),
+                        style: TextStyle(color: DColors.primaryColorBlue),
                       ),
                     );
                   }
@@ -66,7 +65,9 @@ class PharmacyScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = searchState.results[index];
 
-                        return SearchResultCard(result: searchState.results[index]);
+                        return SearchResultCard(
+                          result: searchState.results[index],
+                        );
                       },
                     );
                   }
@@ -74,7 +75,6 @@ class PharmacyScreen extends StatelessWidget {
                   /// Default Categories Screen
                   return BlocBuilder<ProductsCubit, ProductsState>(
                     builder: (context, productState) {
-
                       if (productState.isLoading) {
                         return const CategoryGridShimmer();
                       }
@@ -84,9 +84,10 @@ class PharmacyScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
                               child: Text(
                                 'Browse Categories',
                                 style: TextStyle(
@@ -101,14 +102,16 @@ class PharmacyScreen extends StatelessWidget {
 
                             Expanded(
                               child: GridView.builder(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 20,
-                                  childAspectRatio: 0.72,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
                                 ),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 12,
+                                      mainAxisSpacing: 20,
+                                      childAspectRatio: 0.72,
+                                    ),
                                 itemCount: productState.categories.length,
                                 itemBuilder: (context, index) {
                                   return CategoryGridItem(
@@ -132,4 +135,3 @@ class PharmacyScreen extends StatelessWidget {
     );
   }
 }
-

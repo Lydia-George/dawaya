@@ -9,8 +9,10 @@ import '../../cart/cart_screen.dart';
 import '../../main_navigation_screen.dart';
 import '../../search/widgets/search_bar.dart';
 class PharmacyScreenHeader extends StatelessWidget {
+  final String pharmacyName;
+
   const PharmacyScreenHeader({
-    super.key,
+    super.key, required this.pharmacyName,
   });
 
   @override
@@ -62,6 +64,13 @@ class PharmacyScreenHeader extends StatelessWidget {
                       color: DColors.primaryColorBlue,
                     ),
                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(pharmacyName, style: TextStyle(color: DColors.dWhite),),
+                  ),
+                  Spacer(),
+                  /// cart button
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -69,7 +78,7 @@ class PharmacyScreenHeader extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
 
-                          /// cart button
+
                           Container(
                             width: 42,
                             height: 42,

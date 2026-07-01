@@ -17,7 +17,7 @@ class PharmacyCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => PharmacyScreen(pharmacyId: pharmacy.id),
+            builder: (_) => PharmacyScreen(pharmacyId: pharmacy.id, pharmacyName: pharmacy.name,),
           ),
         );
       },
