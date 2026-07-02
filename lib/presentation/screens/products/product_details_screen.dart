@@ -6,6 +6,7 @@ import 'package:dawaya/data/models/product/product_model.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
 import 'package:dawaya/presentation/cubits/favorite/favorite_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
+import 'package:dawaya/presentation/screens/products/widgets/back_button.dart';
 import 'package:dawaya/presentation/screens/products/widgets/counter_button.dart';
 import 'package:dawaya/presentation/screens/products/widgets/product_image.dart';
 import 'package:dawaya/presentation/screens/products/widgets/size_options.dart';
@@ -52,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Stack(
                 children: [
                   /// -- BACK BUTTON
-                  BackButton(),
+                  CustomBackButton(),
 
                   /// -- product Image
                   ProductImage(widget: widget),

@@ -5,8 +5,8 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../cubits/cart/cart_cubit.dart';
 import '../../cart/cart_screen.dart';
 
-class BackButton extends StatelessWidget {
-  const BackButton({
+class CustomBackButton extends StatelessWidget {
+  const CustomBackButton({
     super.key,
   });
 

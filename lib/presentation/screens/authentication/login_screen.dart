@@ -19,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginScreen extends StatelessWidget {
   final bool redirectToCheckout;
 
+
   const LoginScreen({super.key, this.redirectToCheckout = false});
 
   @override

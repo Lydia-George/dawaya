@@ -8,6 +8,7 @@ class AuthField extends StatefulWidget {
   final Icon icon;
   final bool isObscure;
   final ValueChanged<String> onChanged;
+  final String? Function(String?)? validator;
 
   const AuthField({
     super.key,
@@ -17,6 +18,7 @@ class AuthField extends StatefulWidget {
     required this.icon,
     this.isObscure = false,
     required this.onChanged,
+    this.validator,
   });
 
   @override
@@ -29,6 +31,12 @@ class _AuthFieldState extends State<AuthField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validator ?? (value){
+        if(value == null || value.trim().isEmpty){
+          return '${widget.labelText} is required';
+        }
+        return null;
+      },
       onChanged: widget.onChanged,
       keyboardType: widget.textInputType,
       obscureText: widget.isObscure ? _obscureText : false,
