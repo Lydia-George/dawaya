@@ -3,6 +3,7 @@ import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/core/constants/app_strings.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
+import 'package:dawaya/presentation/cubits/favorite/favorite_cubit.dart';
 import 'package:dawaya/presentation/screens/authentication/login_screen.dart';
 import 'package:dawaya/presentation/screens/main_navigation_screen.dart';
 import 'package:dawaya/presentation/screens/profile/shimmer/profile_shimmer.dart';
@@ -158,6 +159,7 @@ class ProfileScreen extends StatelessWidget {
                 LogoutButton(
                   onPressed: () async{
                     await context.read<AuthCubit>().logout();
+                    context.read<FavoriteCubit>().clear();
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (_) => MainNavigationScreen()),

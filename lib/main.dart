@@ -5,6 +5,7 @@ import 'package:dawaya/data/service/api_service/search/search_repo.dart';
 import 'package:dawaya/firebase_options.dart';
 import 'package:dawaya/presentation/cubits/auth/auth_cubit.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
+import 'package:dawaya/presentation/cubits/favorite/favorite_cubit.dart';
 import 'package:dawaya/presentation/cubits/home/home_cubit.dart';
 import 'package:dawaya/presentation/cubits/pharmacy/pharmacy_cubit.dart';
 import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
@@ -36,7 +37,7 @@ void main() async {
         BlocProvider(create: (_) => HomeCubit()),
         BlocProvider(create: (_) => SearchCubit(SearchRepo())),
         BlocProvider(create: (_) => ThemeCubit()),
-
+        BlocProvider(create: (_) => FavoriteCubit()),
 
       ],
       child: const MyApp(),
