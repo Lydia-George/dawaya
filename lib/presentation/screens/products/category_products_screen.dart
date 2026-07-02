@@ -11,12 +11,14 @@ class CategoryProductsScreen extends StatelessWidget {
   final String categoryId;
   final String categoryName;
   final String pharmacyId;
+  final String pharmacyName;
 
   const CategoryProductsScreen({
     super.key,
     required this.categoryId,
     required this.categoryName,
     required this.pharmacyId,
+     this.pharmacyName ='',
   });
 
   @override
@@ -71,6 +73,7 @@ class CategoryProductsScreen extends StatelessWidget {
                 return ProductListItem(
                   product: state.products[index],
                   pharmacyId: pharmacyId,
+                  pharmacyName: pharmacyName ,
                 );
               },
             );

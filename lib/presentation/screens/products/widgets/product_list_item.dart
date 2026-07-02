@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class ProductListItem extends StatelessWidget {
   final ProductModel product;
   final String pharmacyId;
+  final String pharmacyName;
 
   const ProductListItem({
     super.key,
     required this.product,
     required this.pharmacyId,
+    required this.pharmacyName,
   });
 
   @override
@@ -26,6 +28,7 @@ class ProductListItem extends StatelessWidget {
                   builder: (_) => ProductDetailsScreen(
                     product: product,
                     pharmacyId: pharmacyId,
+                    pharmacyName: pharmacyName,
                   ),
                 ),
               );

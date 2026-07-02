@@ -1,20 +1,27 @@
 import 'package:dawaya/core/constants/app_colors.dart';
 import 'package:dawaya/core/constants/app_sizes.dart';
 import 'package:dawaya/data/models/cart/cart_item_model.dart';
+import 'package:dawaya/data/models/favouriteItem/favorite_item_model.dart';
 import 'package:dawaya/data/models/product/product_model.dart';
 import 'package:dawaya/presentation/cubits/cart/cart_cubit.dart';
+import 'package:dawaya/presentation/cubits/favorite/favorite_cubit.dart';
 import 'package:dawaya/presentation/screens/cart/cart_screen.dart';
+import 'package:dawaya/presentation/screens/products/widgets/counter_button.dart';
+import 'package:dawaya/presentation/screens/products/widgets/product_image.dart';
+import 'package:dawaya/presentation/screens/products/widgets/size_options.dart';
+import 'package:dawaya/presentation/screens/products/widgets/sizes_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel product;
   final String pharmacyId;
+  final String pharmacyName;
 
   const ProductDetailsScreen({
     super.key,
     required this.product,
-    required this.pharmacyId,
+    required this.pharmacyId, required this.pharmacyName,
   });
 
   @override
@@ -45,90 +52,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Stack(
                 children: [
                   /// -- BACK BUTTON
-                  Positioned(
-                    top: 16,
-                    left: 16,
-                    right: 16,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: DColors.dGery2,
-                          child: IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: Icon(
-                              Icons.arrow_back_ios_new,
-                              color: DColors.primaryColorBlue,
-                              size: 18,
-                            ),
-                          ),
-                        ),
-
-                        /// -- CART BUTTON
-                        BlocBuilder<CartCubit, CartState>(
-                          builder: (context, state) {
-                            final itemsCount = state.items.length;
-                            return CircleAvatar(
-                              backgroundColor: DColors.dGery2,
-                              child: Badge(
-                                backgroundColor: DColors.primaryColorBlue,
-                                label: Text('$itemsCount'),
-                                isLabelVisible: itemsCount > 0,
-                                child: IconButton(
-                                  icon: Icon(Icons.add_shopping_cart),
-                                  color: DColors.primaryColorBlue,
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => CartScreen(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  BackButton(),
 
                   /// -- product Image
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 40.0),
-                      child: Image.network(
-                        widget.product.image,
-                        fit: BoxFit.contain,
-                        errorBuilder: (_, _, _) => Container(
-                          height: 220,
-                          color: DColors.dGery2,
-                          child: Icon(Icons.medication_outlined, size: 64),
-                        ),
-                      ),
-                    ),
-                  ),
+                  ProductImage(widget: widget),
 
                   /// -- Sizes : 30 , 60, 90
-                  Positioned(
-                    right: 16,
-                    bottom: 20,
-                    child: Column(
-                      children: [
-                        _buildSizeOption('30', isSelected: true),
-                        SizedBox(height: DSizes.spaceBtwItems),
-                        _buildSizeOption('60', isSelected: false),
-                        SizedBox(height: DSizes.spaceBtwItems),
-                        _buildSizeOption('90', isSelected: false),
-                      ],
-                    ),
-                  ),
+                  SizesButtons(),
                 ],
               ),
             ),
 
-            /// -- WHITE CONTAINER
+            /// -- BLUE CONTAINER
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -141,13 +76,46 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               padding: EdgeInsets.all(24),
               child: Column(
                 children: [
-                  Text(
-                    widget.product.name,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.headlineMedium!.apply(color: DColors.dWhite),
+                  BlocBuilder<FavoriteCubit, FavoriteState>(
+                    builder: (context, favState) {
+                      final isFav = favState.isFavorite(widget.product.id);
+                      return Row(
+                        children: [
+                          Expanded(
+                            /// -- PRODUCT NAME
+                            child: Text(
+                              widget.product.name,
+                              style: Theme.of(context).textTheme.headlineMedium!
+                                  .apply(color: DColors.dWhite),
+                            ),
+                          ),
+
+                          /// -- FAVORITE ICON BUTTON
+                          IconButton(
+                            onPressed: () {
+                              context.read<FavoriteCubit>().toggleFavorites(
+                                FavoriteItemModel(
+                                  productId: widget.product.id,
+                                  name: widget.product.name,
+                                  image: widget.product.image,
+                                  price: widget.product.price,
+                                  pharmacyId: widget.pharmacyId,
+                                  pharmacyName: widget.product.name,
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              isFav ? Icons.favorite : Icons.favorite_border,
+                              color: isFav ? DColors.dRed : DColors.dWhite,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                   SizedBox(height: DSizes.sm),
+
+                  /// -- PRODUCT DESCRIPTION
                   Text(
                     widget.product.description,
                     style: Theme.of(
@@ -155,6 +123,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ).textTheme.titleMedium!.apply(color: DColors.dGery2),
                   ),
                   SizedBox(height: DSizes.spaceBtwSections),
+                  /// PRICE
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -181,7 +150,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               /// -- Minus Button
-                              _buildCounterButton(Icons.remove, _decrement),
+                              buildCounterButton(Icons.remove, _decrement),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: Text(
@@ -192,7 +161,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
 
                               /// -- Add button
-                              _buildCounterButton(Icons.add, _increment),
+                              buildCounterButton(Icons.add, _increment),
                             ],
                           ),
                         ),
@@ -239,40 +208,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildSizeOption(String text, {required bool isSelected}) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: isSelected ? DColors.dWhite : DColors.primaryColorBlue,
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: isSelected ? DColors.primaryColorBlue : DColors.dWhite,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget _buildCounterButton(IconData icon, VoidCallback onPressed) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-        padding: EdgeInsets.zero,
-        minimumSize: Size(28, 28),
-        backgroundColor: DColors.dWhite,
-        foregroundColor: DColors.primaryColorBlue,
-        elevation: 0,
-      ),
-      child: Icon(icon, size: 16),
-    );
-  }
+
 
   void _handleAddToCart(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
@@ -317,7 +254,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 );
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('${widget.product.name} added to cart')),
+                  SnackBar(
+                    content: Text('${widget.product.name} added to cart'),
+                  ),
                 );
               },
               child: Text('Start New Order'),
@@ -328,3 +267,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     }
   }
 }
+
+
+

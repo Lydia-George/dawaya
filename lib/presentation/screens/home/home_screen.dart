@@ -6,6 +6,7 @@ import 'package:dawaya/presentation/cubits/search/search_cubit.dart';
 import 'package:dawaya/presentation/screens/home/shimmer/pharmacy_card_shimmer.dart';
 import 'package:dawaya/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:dawaya/presentation/screens/home/widgets/pharmacy_card.dart';
+import 'package:dawaya/presentation/screens/search/shimmer/search_result_shimmer.dart';
 import 'package:dawaya/presentation/screens/search/widgets/search_result_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +18,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme
-          .of(context)
-          .scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
-
           /// -- Header
           PrimaryHeaderContainer(),
 
@@ -33,8 +31,9 @@ class HomeScreen extends StatelessWidget {
                 if (state.hasSearched) {
                   if (state.isLoading) {
                     return ListView.builder(
-                        itemCount: 4,
-                        itemBuilder: (_, __) => PharmacyCardShimmer());
+                      itemCount: 4,
+                      itemBuilder: (_, __) => SearchResultShimmer(),
+                    );
                   }
                   if (state.errorMessage != null) {
                     return Center(child: Text(state.errorMessage!));
@@ -60,45 +59,46 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, state) {
                     if (state.isLoading) {
                       return ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                          itemCount: 5,
-                          itemBuilder: (_, __) => const  PharmacyCardShimmer()
-                    );
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                        itemCount: 5,
+                        itemBuilder: (_, __) => const PharmacyCardShimmer(),
+                      );
                     }
                     if (state.errorMessage != null) {
-                    return Center(child: Text(state.errorMessage!));
+                      return Center(child: Text(state.errorMessage!));
                     }
 
                     return ListView(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    children: [
-                    /// -- BANNERS
-                    BannerCarousel(),
-                    SizedBox(height: DSizes.spaceBtwItems),
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      children: [
+                        /// -- BANNERS
+                        BannerCarousel(),
+                        SizedBox(height: DSizes.spaceBtwItems),
 
-                    Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                    DText.pharmaciesNearYou,
-                    style: Theme.of(context).textTheme.titleMedium!
-                        .apply(color: DColors.primaryColorBlue),
-                    ),
-                    ),
-                    SizedBox(height: DSizes.spaceBtwItems),
-                    ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: state.pharmacies.length,
-                    itemBuilder: (context, index) {
-                    return PharmacyCard(
-                    pharmacy: state.pharmacies[index],
-                    );
-                    },
-                    )
-                    ,
-                    ]
-                    ,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            DText.pharmaciesNearYou,
+                            style: Theme.of(context).textTheme.titleMedium!
+                                .apply(color: DColors.primaryColorBlue),
+                          ),
+                        ),
+                        SizedBox(height: DSizes.spaceBtwItems),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: state.pharmacies.length,
+                          itemBuilder: (context, index) {
+                            return PharmacyCard(
+                              pharmacy: state.pharmacies[index],
+                            );
+                          },
+                        ),
+                      ],
                     );
                   },
                 );
@@ -110,4 +110,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

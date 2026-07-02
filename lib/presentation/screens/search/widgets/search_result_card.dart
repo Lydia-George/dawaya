@@ -32,6 +32,7 @@ class SearchResultCard extends StatelessWidget {
             builder: (_) => ProductDetailsScreen(
               product: product,
               pharmacyId: result.pharmacyId,
+              pharmacyName: result.pharmacyName,
             ),
           ),
         );
